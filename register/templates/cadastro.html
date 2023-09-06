@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'head' %}
+    <title> eventManager - Cadastro </title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">    
+    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+{% endblock 'head' %}
+{% block 'content' %}
+    <main>
+        <h1> Cadastre-se </h1>
+        <form method = "POST" action="{% url 'formulario_cadastro' %}">
+            {% csrf_token %} 
+            <div class = "campo">
+                <label for = "username"> Nome de Usuário: </label>
+                <input type = "text" name = "username" id = "username" placeholder = "Nome de Usuário">
+            </div> 
+            <div class = "campo">
+                <label for = "firstname"> Nome: </label>
+                <input type = "text" name = "firstname" id = "firstname" placeholder = "Nome">
+            </div>
+            <div class = "campo">
+                <label for = "lastname"> Sobrenome: </label>
+                <input type = "text" name = "lastname" id = "lastname" placeholder = "Sobrenome">
+            </div>
+            <div class = "campo">
+                <label for = "phone"> Telefone: </label>
+                <input type = "tel" name = "phone" id = "phone" placeholder = "Telefone">
+            </div>
+            <div class = "campo">
+                <label for = "e-mail"> E-mail: </label>
+                <input type = "mail" name = "e-mail" id = "e-mail" placeholder = "E-mail">
+            </div>
+            <div class = "campo">
+                <label for = "password"> Senha: </label>
+                <input type = "password" name = "password" id = "password" placeholder = "Senha">
+            </div>
+            <input type = "submit" value = "Realizar Cadastro" id = "btn-cadastrar">
+        </form>
+    </main>
+{% endblock 'content' %}
