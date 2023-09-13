@@ -1,40 +1,45 @@
-import requests
-from django.shortcuts import render
+from .models import User
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.hashers import make_password
+from django.core.exceptions import ValidationError
+from .validators import UppercaseLowercaseDigitValidator
 
-def cadastro(request):
-    return render(request, 'cadastro.html')
-
-@csrf_protect
-def formulario_cadastro(request):
+def register(request):
     if request.method == 'POST':
-        #Obtendo os dados do formulário
         username = request.POST['username']
-        firstname = request.POST['firstname']
-        lastname = request.POST['lastname']
+        fullname = request.POST['fullname']
         phone = request.POST['phone']
         email = request.POST['e-mail']
         password = request.POST['password']
-        
-        dados = {
-            'username': username,
-            'first_name': firstname,
-            'last_name': lastname,
-            'phone': phone,
-            'email': email,
-            'password': password,
-         }
-
-        # Fazer a chamada POST para a API
-        api_url = 'http://localhost:8080/api/v1/register/'
-        response = requests.post(api_url, data=dados)
-
-        if response.status_code == 201:
-            return HttpResponse('Cadastrado com sucesso!')
+        isPromoter_str = request.POST.get('isPromoter')
+        if isPromoter_str:
+            isPromoter = isPromoter_str.lower() == 'true'
         else:
-            return HttpResponse('Erro')
+            isPromoter = False
         
-    return render(request, 'cadastro.html')
+
+        #Verifica se o e-mail e username já estão cadastado
+        if User.objects.filter(username=username).exists():
+            return redirect('register')
+        elif User.objects.filter(email=email).exists():
+            return redirect('register')
+
+        #Valida a senha do usuário
+        validator = UppercaseLowercaseDigitValidator(min_digits=1, min_lower=1, min_upper=1)
+        try:
+            validator(password)
+        except ValidationError as e:
+            #return render(request, 'cadastro.html', {'error_message': str(e)})
+            return HttpResponse(str(e), status=400)
+        
+        #Cria um novo usuário
+        user = User(username=username, fullname=fullname, phone=phone,
+                    email=email, password=make_password(password), isPromoter=isPromoter)
+        user.save()
+        return render(request, 'cadastroRealizado.html')
+    
+    else:
+        return render(request, 'cadastro.html')
 
 

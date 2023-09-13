@@ -44,6 +44,7 @@ div.campo > input::placeholder {
 input#btn-cadastrar {
     height: 40px;
     width: 150px;
+    margin-top: 20px;
     border: 1px solid var(--cor02);
     background-color: var(--cor02);
     color: #FFFFFF;
