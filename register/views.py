@@ -42,4 +42,3 @@ def register(request):
     else:
         return render(request, 'cadastro.html')
 
-
