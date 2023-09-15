@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
-from .validators import UppercaseLowercaseDigitValidator
+from .validators import UppercaseLowercaseDigitValidator, phoneNumberValidator
+from django.contrib import messages
 
 def register(request):
     if request.method == 'POST':
@@ -20,18 +21,29 @@ def register(request):
         
 
         #Verifica se o e-mail e username já estão cadastado
+        error_message = {}
         if User.objects.filter(username=username).exists():
-            return redirect('register')
-        elif User.objects.filter(email=email).exists():
-            return redirect('register')
+            error_message['username'] = "Username já cadastrado."
+            return render(request, 'cadastro.html', {'error_message': error_message, 'username': username})
+        if User.objects.filter(email=email).exists():
+            error_message['email'] = "E-mail já está em uso."
+            return render(request, 'cadastro.html', {'error_message': error_message, 'email': email})
 
         #Valida a senha do usuário
         validator = UppercaseLowercaseDigitValidator(min_digits=1, min_lower=1, min_upper=1)
         try:
             validator(password)
         except ValidationError as e:
-            #return render(request, 'cadastro.html', {'error_message': str(e)})
-            return HttpResponse(str(e), status=400)
+            error_message['email'] = 'Sua senha deve possuir pelo menos oito caracteres, incluindo letras maiúsculas e minúsculas e números'
+            return render(request, 'cadastro.html', {'error_message': error_message, 'password': password})
+        
+        #Verifica se o número de telefone é valido
+        validatorPhone = phoneNumberValidator.validate_phone_number(phone)
+        try:
+            validatorPhone
+        except ValidationError as e :
+            error_message['phone'] = 'O número de telefone não é válido. Certifique-se de incluir apenas números'
+            return render(request, 'cadastro.html', {'error_message': error_message, 'phone': phone})
         
         #Cria um novo usuário
         user = User(username=username, fullname=fullname, phone=phone,
@@ -40,5 +52,5 @@ def register(request):
         return render(request, 'cadastroRealizado.html')
     
     else:
-        return render(request, 'cadastro.html')
+        return render(request, 'cadastro.html', {'messages': messages.get_messages(request)})
 

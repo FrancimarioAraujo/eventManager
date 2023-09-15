@@ -15,6 +15,9 @@
             <div class = "campo">
                 <label for = "username"> Nome de Usuário: </label>
                 <input type = "text" name = "username" id = "username" placeholder = "Nome de Usuário" required>
+                {% if error_message and 'username' in error_message %}
+                    <span style="color: red;">{{ error_message.username }}</span>
+                {% endif %}
             </div> 
             <div class = "campo">
                 <label for = "fullname"> Nome Completo: </label>
@@ -23,14 +26,23 @@
             <div class = "campo">
                 <label for = "phone"> Telefone: </label>
                 <input type = "tel" name = "phone" id = "phone" placeholder = "Telefone" required>
+                {% if error_message and 'phone' in error_message %}
+                    <span style="color: red;">{{ error_message.phone }}</span>
+                {% endif %}
             </div>
             <div class = "campo">
                 <label for = "e-mail"> E-mail: </label>
                 <input type = "mail" name = "e-mail" id = "e-mail" placeholder = "E-mail" required>
+                {% if error_message and 'email' in error_message %}
+                    <span style="color: red;">{{ error_message.email }}</span>
+                {% endif %}
             </div>
             <div class = "campo">
                 <label for = "password"> Senha: </label>
                 <input type = "password" name = "password" id = "password" placeholder = "Senha" required>
+                {% if error_message and 'password' in error_message %}
+                    <span style="color: red;">{{ error_message.password }}</span>
+                {% endif %}
             </div>
             <div id = "opcao">
                 <p> Você irá promover eventos? </p>

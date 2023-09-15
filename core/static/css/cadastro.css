@@ -61,3 +61,6 @@ input#btn-cadastrar:hover {
     transition: 0.5s;
 }
 
+span {
+    display: block;
+}
