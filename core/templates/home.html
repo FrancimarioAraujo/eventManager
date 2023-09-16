@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'head' %}
+    <title> eventManager </title>
+    <link rel = "stylesheet" href = "{% static 'css/base.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/home.css' %}">
+{% endblock 'head' %}
+
+{% block 'content' %}
+    <main>
+        <div id = "banner">
+            <div id = "paragrafo">
+                <p>
+                    <span id = "destaque"> Planeje eventos de <br> sucesso com toda a</span> <br> Facilidade
+                </p>
+                <a href = "{% url 'register' %}"> <button> Seja um Promotor de Eventos </button> </a>
+            </div>
+            <img src = "{% static 'img/banner-home.jpg' %}" alt = "Imagem do Banner">
+        </div>
+    </main>
+{% endblock 'content' %}
