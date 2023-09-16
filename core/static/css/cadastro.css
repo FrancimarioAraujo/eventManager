@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+main {
+    width: 700px;
+    padding: 20px;
+    margin: auto;
+    background-color: #FFFFFF;
+    text-align: center;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.492);
+}
+
+h1 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+}
+
+form {
+    display: block;
+}
+
+div.campo {
+    margin-bottom: 20px;
+}
+
+div.campo > label {
+    display: none;
+}
+
+div.campo > input {
+    height: 35px;
+    width: 250px;
+    border: 1px solid #A49D9D;
+    border-top: none;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.386);
+}
+
+div.campo > input::placeholder {
+    font-size: 1em;
+    padding: 10px;
+    text-decoration: none;
+    border-bottom: 1px solid #A49D9D;
+}
+
+input#btn-cadastrar {
+    height: 40px;
+    width: 150px;
+    margin-top: 20px;
+    border: 1px solid var(--cor02);
+    background-color: var(--cor02);
+    color: #FFFFFF;
+    font-size: 0.8em;
+    font-weight: bold;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.482);
+    cursor: pointer;
+    scale: 1;
+    transition: 0.5s;
+}
+
+input#btn-cadastrar:hover {
+    scale: 1.2;
+    transition: 0.5s;
+}
+
+span {
+    display: block;
+}

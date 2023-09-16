@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+div#banner {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #FFFFFF;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.492);
+    display: flex;
+}
+
+div#paragrafo {
+    margin-top: 50px;
+}
+
+div#paragrafo > p {
+    font-family: Roboto;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+span#destaque {
+    color: var(--cor02);
+}
+
+div#paragrafo > a > button {
+    background-color: var(--cor02);
+    border: 2px solid var(--cor02);
+    border-radius: 8px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.492);
+    color: #FFFFFF;
+    width: 300px;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    scale: 1;
+    transition: 0.5s;
+}
+
+div#paragrafo > a > button:hover {
+    scale: 1.1;
+    transition: 0.5s;
+}
+
+div#banner > img {
+    margin-left: 30px;
+    width: 600px;
+    height: 330px;
+}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'head' %}
+    <title> eventManager - Cadastro </title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">    
+    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+{% endblock 'head' %}
+{% block 'content' %}
+    <main>
+        <h1> Cadastre-se </h1>
+        <form method = "POST" action="{% url 'register' %}">
+            {% csrf_token %} 
+            <div class = "campo">
+                <label for = "username"> Nome de Usuário: </label>
+                <input type = "text" name = "username" id = "username" placeholder = "Nome de Usuário" required>
+                {% if error_message and 'username' in error_message %}
+                    <span style="color: red;">{{ error_message.username }}</span>
+                {% endif %}
+            </div> 
+            <div class = "campo">
+                <label for = "fullname"> Nome Completo: </label>
+                <input type = "text" name = "fullname" id = "fullname" placeholder = "Nome Completo" required>
+            </div>
+            <div class = "campo">
+                <label for = "phone"> Telefone: </label>
+                <input type = "tel" name = "phone" id = "phone" placeholder = "Telefone" required>
+                {% if error_message and 'phone' in error_message %}
+                    <span style="color: red;">{{ error_message.phone }}</span>
+                {% endif %}
+            </div>
+            <div class = "campo">
+                <label for = "e-mail"> E-mail: </label>
+                <input type = "mail" name = "e-mail" id = "e-mail" placeholder = "E-mail" required>
+                {% if error_message and 'email' in error_message %}
+                    <span style="color: red;">{{ error_message.email }}</span>
+                {% endif %}
+            </div>
+            <div class = "campo">
+                <label for = "password"> Senha: </label>
+                <input type = "password" name = "password" id = "password" placeholder = "Senha" required>
+                {% if error_message and 'password' in error_message %}
+                    <span style="color: red;">{{ error_message.password }}</span>
+                {% endif %}
+            </div>
+            <div id = "opcao">
+                <p> Você irá promover eventos? </p>
+                <input type = "radio" name = "isPromoter" id = "isPromoterTrue" value = "True">
+                <label for = "isPromoterTrue"> Sim </label>
+                <br>
+                <input type = "radio" name = "isPromoter" id = "isPromoterFalse" value = "False" checked>
+                <label for = "isPromoterFalse"> Não </label>
+            </div>
+            <input type = "submit" value = "Realizar Cadastro" id = "btn-cadastrar">
+        </form>
+    </main>
+    <script>
+        $(document).ready(function() {
+            $('#phone').inputmask("(99) 99999-9999"); // Definindo a máscara do telefone
+        });
+    </script>
+{% endblock 'content' %}
