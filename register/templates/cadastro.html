@@ -10,8 +10,7 @@
 {% block 'content' %}
     <main>
         <h1> Cadastre-se </h1>
-        <form method = "POST" action="{% url 'register' %}">
-            {% csrf_token %} 
+        <form method = "POST" action="{% url 'register' %}"> {% csrf_token %}
             <div class = "campo">
                 <label for = "username"> Nome de Usuário: </label>
                 <input type = "text" name = "username" id = "username" placeholder = "Nome de Usuário" required>

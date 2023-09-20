@@ -1,6 +1,5 @@
 from .models import User
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 from .validators import UppercaseLowercaseDigitValidator, phoneNumberValidator
