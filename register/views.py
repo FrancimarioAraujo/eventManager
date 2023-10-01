@@ -1,11 +1,9 @@
-from .models import User
 from django.shortcuts import render
 from django.contrib.auth.hashers import make_password
-from django.contrib import messages
 import json
 from django.http import JsonResponse
 from django.db import IntegrityError
-import re
+from .models import CustomUser
 
 def register(request):
     if request.method == 'POST':
@@ -22,14 +20,14 @@ def register(request):
 
         errors = {}
     
-        if User.objects.filter(username = username).exists():
+        if CustomUser.objects.filter(username = username).exists():
             errors['username'] = 'Nome de usuário já existe'
 
-        if User.objects.filter(email = email).exists():
+        if CustomUser.objects.filter(email = email).exists():
             errors['email'] = 'Este e-mail já está cadastrado'
         
         try:
-            user = User(username=username, fullname=fullname, phone=phone,
+            user = CustomUser(username=username, fullname=fullname, phone=phone,
                         email=email, password=make_password(password), isPromoter=isPromoter)
             user.save()
             response_data = {'success': True}
