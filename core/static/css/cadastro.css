@@ -64,30 +64,3 @@ input#btn-cadastrar:hover {
 span {
     display: block;
 }
-
-.alert-success {
-    display: none;
-    position: fixed;
-    top: 85px;
-    right: 20px;
-    padding: 20px;
-    border-radius: 5px;
-    font-size: 20px;
-    background-color: #4CAF50; 
-    color: white; 
-    width: 425px;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out; 
-}
-
-.hidden {
-    opacity: 0;
-    display: none;
-}
-
-.visible {
-    opacity: 1;
-    display: block;
-}
-
-  

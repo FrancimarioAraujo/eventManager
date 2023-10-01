@@ -2,13 +2,12 @@
 {% block 'head' %}
     <title>eventManager - Cadastro</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
-    <link rel="stylesheet" href="{% static '/css/cadastro.css/' %}" />
+    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
 {% endblock 'head' %} 
 {% block 'content' %}
     <main>
-    <div id="success-message" class="alert-success">  </div>
     <h1>Cadastre-se</h1>
     <form id="formRegister" method="POST" action="{% url 'register' %}">
         {% csrf_token %}
@@ -21,7 +20,9 @@
             placeholder="Nome de Usuário"
             required
         />
-        <span class="error-message" id="username-error"></span>
+        {% if error_message and 'username' in error_message %}
+        <span style="color: red">{{ error_message.username }}</span>
+        {% endif %}
         </div>
         <div class="campo">
         <label for="fullname"> Nome Completo: </label>
@@ -42,18 +43,22 @@
             placeholder="Telefone"
             required
         />
-        <span class="error-message" id="phone-error"></span>
+        {% if error_message and 'phone' in error_message %}
+        <span style="color: red">{{ error_message.phone }}</span>
+        {% endif %}
         </div>
         <div class="campo">
-        <label for="email"> E-mail: </label>
+        <label for="e-mail"> E-mail: </label>
         <input
             type="mail"
-            name="email"
-            id="email"
+            name="e-mail"
+            id="e-mail"
             placeholder="E-mail"
             required
         />
-        <span class="error-message" id="email-error"></span>
+        {% if error_message and 'email' in error_message %}
+        <span style="color: red">{{ error_message.email }}</span>
+        {% endif %}
         </div>
         <div class="campo">
         <label for="password"> Senha: </label>
@@ -64,7 +69,9 @@
             placeholder="Senha"
             required
         />
-        <span class="error-message" id="password-error"></span>
+        {% if error_message and 'password' in error_message %}
+        <span style="color: red">{{ error_message.password }}</span>
+        {% endif %}
         </div>
         <div id="opcao">
         <p>Você irá promover eventos?</p>
