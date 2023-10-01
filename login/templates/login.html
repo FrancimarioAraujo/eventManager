@@ -5,6 +5,23 @@
 {% endblock 'head'%}
 
 {% block 'content'%}
-<h1>Página de login</h1>
+<main>
+    <form id="formLogin" method="POST" action="{% url 'login_user' %}">
+    {% csrf_token %}
+        <div class="campo">
+            <label for="username"> Nome de Usuário: </label>
+            <input type="text" name="username" id="username" placeholder="Nome de Usuário"required/>
+        </div>    
+        <div class="campo">
+            <label for="password"> Senha: </label>
+            <input type="password" name="password" id="password" placeholder="Senha"required/>
+
+        </div>    
+        <input type="submit" value="Login" id="btn-login">
+    </form>   
+</main>
+<script src="{% static 'js/login.js'%}"></script>
+
 {% endblock 'content'%}
+
 
