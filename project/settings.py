@@ -31,10 +31,6 @@ INSTALLED_APPS = [
     'login.apps.LoginConfig'
 ]
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-]
-
 AUTH_USER_MODEL = 'register.CustomUser'
 
 
@@ -47,6 +43,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     #'django.contrib.staticfiles.middleware.StaticFilesMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 ROOT_URLCONF = 'project.urls'

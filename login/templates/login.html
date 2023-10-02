@@ -2,10 +2,12 @@
 {%load static%}
 {% block 'head'%}
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link rel = "stylesheet" href = "{% static 'css/login.css' %}">
 {% endblock 'head'%}
 
 {% block 'content'%}
 <main>
+    <h1> Login </h1>
     <form id="formLogin" method="POST" action="{% url 'login_user' %}">
     {% csrf_token %}
         <div class="campo">
@@ -15,7 +17,6 @@
         <div class="campo">
             <label for="password"> Senha: </label>
             <input type="password" name="password" id="password" placeholder="Senha"required/>
-
         </div>    
         <input type="submit" value="Login" id="btn-login">
     </form>   
