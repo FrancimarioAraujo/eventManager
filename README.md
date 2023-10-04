@@ -23,12 +23,29 @@ O projeto está organizado da seguinte maneira:
   
 - **login/**
   - Aplicação Django para o login dos usuários.
+ 
+## Configuração das Variáveis de ambiente
 
- ## Configuração do Banco de Dados
+Para configurar as variáveis de ambiente, você precisará seguir os passos abaixo:
+
+1. **Criar o arquivo de configuração local (.env)**: Copie o conteúdo do arquivo `env.example` e crie um novo arquivo chamado `.env`. Este arquivo conterá as variáveis de ambiente necessárias para configurar o projeto.
+
+2. **Ajustar as variáveis de ambiente**: Abra o arquivo `.env` e ajuste as variáveis conforme necessário. As variáveis incluem configurações de chave do projeto Django, senha do banco de dados e estado do Debug.
+
+   Exemplo do arquivo `.env`:
+
+   ```plaintext
+   # Configurações de exemplo
+   SECRET_KEY= 'my_secret_key'
+   DEBUG=True
+   DB_PASSWORD = 'sua_senha'
+
+
+## Configuração do Banco de Dados
 
 Este projeto utiliza o banco de dados PostgreSQL. Para configurar a conexão com o banco de dados, siga os passos abaixo:
 
-1. Abra o arquivo `settings.py` localizado na pasta `eventManager/eventManager/`.
+1. Abra o arquivo `settings.py` localizado na pasta `eventManager/project/`.
 
 2. Localize a seção `DATABASES` e configure as credenciais do banco de dados PostgreSQL conforme o exemplo abaixo:
 
@@ -38,7 +55,7 @@ Este projeto utiliza o banco de dados PostgreSQL. Para configurar a conexão com
            'ENGINE': 'django.db.backends.postgresql',
            'NAME': 'nome_do_banco_de_dados',
            'USER': 'seu_usuario',
-           'PASSWORD': 'sua_senha',
+           'PASSWORD': config('DB_PASSWORD'),
            'HOST': 'localhost',   # ou o endereço do seu servidor PostgreSQL
            'PORT': '',             # porta do PostgreSQL (opcional)
        }
