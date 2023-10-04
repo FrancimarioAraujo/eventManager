@@ -90,4 +90,11 @@ span {
     display: block;
 }
 
-  
+/* Media-Query para telas de até 768px */
+
+@media screen and (max-width: 768px) {
+
+    main {
+        width: 500px;
+    }
+}
