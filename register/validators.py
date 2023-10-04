@@ -10,7 +10,7 @@ def password_validator(password):
         return False
     
     # Verifica se a senha tem pelo menos um número
-    if not re.search(r'\d,', password):
+    if not re.search(r'[0-9]', password):
         return False
     
     return True

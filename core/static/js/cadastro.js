@@ -19,7 +19,6 @@ document.getElementById("formRegister").addEventListener("submit", function (eve
     })
     .then((response) => response.json())
     .then((data) => {
-        console.log("Resposta do servidor:", data);
         if (data.success) {
             function showSuccessMessage(message) {
                 const successMessage = document.getElementById('success-message');

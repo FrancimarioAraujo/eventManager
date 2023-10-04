@@ -21,9 +21,11 @@ document.getElementById("formLogin").addEventListener("submit", function (event)
     .then((data) => {
         console.log("Resposta do servidor:", data);
         if (data.success) {
-            window.location.href = "/home/";
+          window.location.href = "/home/";
         } else if (data.error) {
-            console.log('Erro na autenticaçao')
+          const errorMessageElement = document.getElementById("error-message");
+          errorMessageElement.textContent = "Credenciais inválidas"; 
+          errorMessageElement.style.display = "block";
         }
     });
 });
