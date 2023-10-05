@@ -22,7 +22,7 @@ div#imagem {
     float: right;
 }
 
-form#formLogin {
+div#formulario {
     float: left;
     padding: 20px;
 }

@@ -7,16 +7,20 @@
 {% endblock 'head' %}
 
 {% block 'content' %}
-    <main>
-        <div id = "banner">
-            
-        </div>
+    {% if user.is_authenticated %}
+    
+    {% else %}
+        <main>    
+            <div id = "banner">
+                
+            </div>
 
-        <div id = "paragrafo">
-            <p>
-                <span id = "destaque"> Planeje eventos de <br> sucesso com toda a</span> <br> Facilidade
-            </p>
-            <a href = "{% url 'register' %}"> <button> Seja um Promotor de Eventos </button> </a>
-        </div>
-    </main>
+            <div id = "paragrafo">
+                <p>
+                    <span id = "destaque"> Planeje eventos de <br> sucesso com toda a</span> <br> Facilidade
+                </p>
+                <a href = "{% url 'register' %}"> <button> Seja um Promotor de Eventos </button> </a>
+            </div>
+        </main>
+    {% endif %}
 {% endblock 'content' %}

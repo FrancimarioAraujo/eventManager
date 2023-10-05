@@ -24,7 +24,7 @@ document.getElementById("formLogin").addEventListener("submit", function (event)
           window.location.href = "/home/";
         } else if (data.error) {
           const errorMessageElement = document.getElementById("error-message");
-          errorMessageElement.textContent = "Credenciais inválidas"; 
+          errorMessageElement.textContent = "<p> Credenciais inválidas </p>"; 
           errorMessageElement.style.display = "block";
         }
     });
