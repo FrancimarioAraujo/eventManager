@@ -1,16 +1,27 @@
 @charset "UTF-8";
 
-div#banner {
+main {
     width: 1000px;
-    margin: 0 auto;
-    padding: 30px;
+    height: 500px;
+    margin: 20px auto;
     background-color: #FFFFFF;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.492);
-    display: flex;
+}
+
+div#banner {
+    width: 50%;
+    height: 100%;
+    background: url("../img/banner-home.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+    float: right;
 }
 
 div#paragrafo {
     margin-top: 50px;
+    float: left;
+    width: 50%;
+    padding: 30px;
 }
 
 div#paragrafo > p {
@@ -48,4 +59,28 @@ div#banner > img {
     margin-left: 30px;
     width: 600px;
     height: 330px;
+}
+
+/* Media-Query para telas de até 992px */
+
+@media screen and (max-width: 992px) {
+    
+    main {
+        width: 400px;
+        height: 600px;
+    }
+
+    div#banner {
+        display: block;
+        float: none;
+        width: 100%;
+        height: 50%;
+    }
+
+    div#paragrafo {
+        display: block;
+        float: none;
+        width: 100%;
+        height: 50%;
+    }
 }

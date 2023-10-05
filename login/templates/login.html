@@ -1,0 +1,39 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block 'head'%}
+    <title> eventManager - Login </title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link rel = "stylesheet" href = "{% static 'css/login.css' %}">
+{% endblock 'head'%}
+
+{% block 'content'%}
+<main>
+    
+    <div id = "imagem">
+        
+    </div>
+    <div id="formLogin">
+        <h1> Login </h1>
+        <form id="formLogin" method="POST" action="{% url 'login_user' %}">
+        {% csrf_token %}
+            <div class="campo">
+                <label for="username"> Nome de Usuário: </label>
+                <input type="text" name="username" id="username" placeholder="Nome de Usuário"required/>
+            </div>
+            <div class="campo">
+                <label for="password"> Senha: </label>
+                <input type="password" name="password" id="password" placeholder="Senha"required/>
+            </div>
+            <input type="submit" value="Login" id="btn-login">
+            <p>
+                Esqueceu a senha? <a href = ""> <span> Clique aqui </span> </a>
+            </p>
+        </form>
+    </div>
+    <div id="error-message" class="error-message" style="display: none;"></div>
+</main>
+<script src="{% static 'js/login.js'%}"></script>
+
+{% endblock 'content'%}
+
+
