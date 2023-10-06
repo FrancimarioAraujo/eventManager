@@ -5,6 +5,7 @@ main {
     height: 300px;
     margin: auto;
     background-color: #FFFFFF;
+    border-radius: 10px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.492);
 }
 
@@ -22,7 +23,7 @@ div#imagem {
     float: right;
 }
 
-form#formLogin {
+div#formulario {
     float: left;
     padding: 20px;
 }
