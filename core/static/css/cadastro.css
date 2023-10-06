@@ -10,6 +10,13 @@ main {
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.492);
 }
 
+span.error-message{
+    color: #FF0000; /* Cor vermelha para as mensagens de erro */
+    font-size: 14px; /* Tamanho da fonte para as mensagens de erro */
+    margin-top: 5px;
+    font-weight: bold;
+}
+
 h1 {
     font-size: 2.2em;
     margin-bottom: 20px;
