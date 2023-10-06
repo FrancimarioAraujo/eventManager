@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 
 def profile(request):
     return render(request, 'meuperfil.html')
@@ -13,7 +12,6 @@ def update_profile(request):
         user.email = request.POST.get('email')
 
         user.save()
-        #return HttpResponse('Atualizado')
         return redirect('profile')
 
     else:
