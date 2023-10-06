@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'head' %}
+    <title> eventManager - {{user.fullname}} </title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/meuperfil.css' %}">
+{% endblock 'head' %}
+{% block 'content' %}
+    <main>
+        <h1> {{ user.fullname }} </h1>
+        <div id = "informacoes">
+            <h2> Informações </h2>
+            <div class = "campo">
+                {{ user.username }}
+            </div>
+            <div class = "campo">
+                {{ user.fullname }}
+            </div>
+            <div class = "campo">
+                {{ user.phone }}
+            </div>
+            <div class = "campo">
+                {{ user.email }}
+            </div>
+            <a href = "{% url 'update_profile'%}"> <button> Editar Perfil </button> </a> 
+        </div>
+    </main>
+{% endblock 'content' %}

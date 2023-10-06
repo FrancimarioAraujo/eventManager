@@ -18,10 +18,10 @@
                     {% if user.isPromoter %}
                     
                     <li> <a> <button> Meus Eventos </button> </a> </li>
-                    <li> <a> <button> Meu Perfil </button> </a> </li>
+                    <li> <a href = "{% url 'profile' %}"> <button> Meu Perfil </button> </a> </li>
                     <li> <a href = "{% url 'logout' %}"> <button> Sair </button> </a> </li>
                     {% else %}
-                        <li> <a> <button> Meu Perfil </button> </a> </li>
+                        <li> <a href = "{% url 'profile' %}"> <button> Meu Perfil </button> </a> </li>
                         <li> <a href = "{% url 'logout' %}"> <button> Sair </button> </a> </li>
                     {% endif %}    
                 {% else %}
