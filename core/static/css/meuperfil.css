@@ -6,7 +6,7 @@ main {
 
 div#informacoes {
     width: 700px;
-    margin: auto;
+    margin: 20px auto;
     padding: 20px;
     background-color: #FFFFFF;
     border-radius: 10px;

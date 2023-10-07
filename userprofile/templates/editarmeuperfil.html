@@ -2,20 +2,34 @@
 {% load static %}
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'css/meuperfil.css' %}">
+    <link rel="stylesheet" href="{% static 'css/editarmeuperfil.css' %}">
 {% endblock 'head' %}
 {% block 'content' %}
-    <form method="POST" action="{% url 'update_profile' %}">
-        {% csrf_token %}
-        <label for="username">Nome de usuário:</label>
-        <input type="text" id="username" name="username" value="{{ user.username }}" required><br>
-        <label for="fullname">Nome Completo:</label>
-        <input type="text" id="fullname" name="fullname" value="{{ user.fullname }}" required><br>
-        <label for="phone">Telefone:</label>
-        <input type="text" id="phone" name="phone" value="{{ user.phone }}" required><br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="{{ user.email }}" required><br>
-        <input type="submit" value = "Salvar">
-        <a href = "{% url 'profile' %}"> <button> Cancelar </button> </a> 
-    </form>
+    <main>
+        <h1> {{ user.fullname }} </h1>
+        <div id="informacoes">
+            <h2> Informações </h2>
+            <form method="POST" action="{% url 'update_profile' %}">
+                {% csrf_token %}
+                <div class = "campo">
+                    <label for = "username"> Nome de usuário: </label>
+                    <input type = "text" id = "username" name = "username" value="{{ user.username }}" required>
+                </div>
+                <div class = "campo">
+                    <label for = "fullname"> Nome Completo: </label>
+                    <input type = "text" id = "fullname" name = "fullname" value="{{ user.fullname }}" required>
+                </div>
+                <div class="campo">
+                    <label for = "phone"> Telefone: </label>
+                    <input type = "tel" id = "phone" name="phone" value="{{ user.phone }}" required>
+                </div>
+                <div class="campo">
+                    <label for = "email"> Email: </label>
+                    <input type = "email" id = "email" name = "email" value = "{{ user.email }}" required>
+                </div>
+                <a href = "{% url 'profile' %}" style = "margin-right: 50%;"> <button id = "btn-cancelar"> Cancelar </button></a>
+                <input type = "submit" value = "Salvar" id = "btn-salvar">
+            </form>
+        </div>
+    </main>
 {% endblock 'content' %}
