@@ -1,4 +1,6 @@
 import re
+import phonenumbers
+
 
 def password_validator(password):
     # Verifica se a senha tem pelo menos 8 caracteres
@@ -14,3 +16,10 @@ def password_validator(password):
         return False
     
     return True
+
+def phone_number_validator(phone):
+    try:
+        number = phonenumbers.parse(phone, "BR")
+        return phonenumbers.is_valid_number(number)
+    except phonenumbers.NumberParseException:
+        return False
