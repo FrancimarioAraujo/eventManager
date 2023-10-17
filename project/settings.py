@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'register.apps.RegisterConfig',
     'login.apps.LoginConfig',
-    'userprofile.apps.UserProfileConfig'
+    'userprofile.apps.UserProfileConfig',
+    'event.apps.EventConfig',
 ]
 
 AUTH_USER_MODEL = 'register.CustomUser'

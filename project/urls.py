@@ -7,4 +7,5 @@ urlpatterns = [
     path('cadastro/', include('register.urls')),
     path('login/', include('login.urls')),
     path('profile/', include('userprofile.urls')),
+    path('eventos/', include('event.urls')),
 ]
