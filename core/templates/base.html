@@ -16,8 +16,7 @@
             <ul>
                 {% if user.is_authenticated %}
                     {% if user.isPromoter %}
-                    
-                    <li> <a> <button> Meus Eventos </button> </a> </li>
+                    <li> <a href= "{% url 'listEvent' %}"> <button> Meus Eventos </button> </a> </li>
                     <li> <a href = "{% url 'profile' %}"> <button> Meu Perfil </button> </a> </li>
                     <li> <a href = "{% url 'logout' %}"> <button> Sair </button> </a> </li>
                     {% else %}

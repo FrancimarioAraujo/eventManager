@@ -1,0 +1,16 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block 'head'%}
+    <title> {{ evento.name }} </title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock 'head'%}
+
+{% block 'content' %}
+
+    <h1>{{ evento.name }}</h1>
+
+    <p>Endereço: {{ evento.address }}</p>
+    <p>Data e Hora: {{ evento.dateTime }}</p>
+    <p>Descrição: {{ evento.description }}</p>
+    <p>Valor da Entrada: R$ {{ evento.ticketPrice }}</p> 
+{% endblock 'content' %}

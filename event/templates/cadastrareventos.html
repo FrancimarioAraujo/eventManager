@@ -2,9 +2,56 @@
 {% load static %}
 {% block 'head'%}
     <title> eventManager - Cadastrar Eventos </title>
-    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/cadastrareventos.css' %}">
 {% endblock 'head'%}
 
 {% block 'content'%}
+<main>    
+    <h1> Novo Evento </h1>
+    <form id="formEvent" method="POST" action="{% url 'createEvent' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="campo">
+                <label for="nameEvent"> Nome do evento: </label>
+                <input type="text" name="nameEvent" id="nameEvent" placeholder= "Nome do evento" required/>
+                {% if nameError %}
+                    <div class="error-message">Nome já cadastrado</div>
+                {% endif %}
+            </div>
+            <div class="campo">
+                <label for="description"> Descrição:</label>
+                <textarea rows = "4" col = "50" placeholder = "Descrição do evento" id="description" name="description" required></textarea>
+            </div>
+            <div class="campo">
+                <label for="address"> Endereço: </label>
+                <input type="text" name="address" id="address" placeholder="Local do evento" required/>
+            </div>
+            <div class="campo">
+                <label for="dateTime"> Data e Hora:</label>
+            <input type="datetime-local" id="dateTime" name="dateTime" required>
+            </div>
+            <div class="campo">
+                <label for="ticketPrice"> Valor da entrada:</label>
+                <input type="number" placeholder = "Valor da entrada"  min = "0" id="ticketPrice" name="ticketPrice">
+            </div>
+            <div class="campo">
+                <label for="image" class = "visivel"> Imagem:</label>
+                <input type="file" id="image" name="image" required>
+            </div>
+            <input type="submit" value="Criar Evento" id="btn-event">
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+             {% if message.tags == 'success' %}
+                <div  id="success-message" class="alert-success">
+                     <script src="{% static 'js/cadastroEventos.js' %}"></script>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+
+</main>
 
 {% endblock 'content'%}

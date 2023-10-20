@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from register.validators import password_validator
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def profile(request):
     return render(request, 'meuperfil.html')
 
@@ -20,6 +22,7 @@ def update_user_data(user, request):
     user.email = request.POST.get('email')
     user.save()
 
+@login_required
 def update_profile(request):
     if request.method == 'POST':
         user = request.user

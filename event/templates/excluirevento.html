@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block 'head'%}
+    <title> eventManager - Excluir Eventos </title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock 'head'%}
+
+{% block 'content' %}
+    <h1>Confirmar Exclusão do Evento</h1>
+    <p>Por favor, confirme se você deseja excluir o evento a seguir:</p>
+
+    <p><strong>Nome do Evento:</strong> {{ event.name }}</p>
+    <p><strong>Endereço:</strong> {{ event.address }}</p>
+    <p><strong>Data e Hora:</strong> {{ event.date }}</p>
+    <p><strong>Descrição:</strong> {{ event.description }}</p>
+    <p><strong>Preço do Ingresso:</strong> R$ {{ event.ticketPrice }}</p>
+
+    <form method="post" action="{% url 'delEvent' event.id %}">
+        {% csrf_token %}
+        <input type="submit" value="Confirmar Exclusão">
+    </form>
+
+    <a href="{% url 'listEvent' %}">Cancelar</a>
+{% endblock 'content' %}
