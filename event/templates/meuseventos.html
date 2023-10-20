@@ -19,6 +19,7 @@
                         {{ evento.description }}
                         <br>
                         {{ evento.date }}
+                        <br>
                         <a href = "{% url 'editEvent' evento.id %}"> <button id = "btn-editar-evento"> Editar Evento </button></a>
                         <a href = "{% url 'delEvent' evento.id %}"> <button id = "btn-excluir-evento"> Excluir Evento </button></a>
                     </div>

@@ -10,7 +10,7 @@
 {% block 'content' %}
     {% if user.is_authenticated %}
         <div class="container">
-            <h1 class="mt-4">Eventos Disponíveis</h1>
+            <h1 class="mt-4"> Eventos Disponíveis </h1>
     
             <div class="row">
                 {% for event in events %}
@@ -20,7 +20,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ event.name }}</h5>
                                 <h6 class="card-title">{{ event.date }}</h6>
-                                <a href="{% url 'viewEvent' event.id  %}" class="btn btn-primary">Detalhes</a>
+                                <a href="{% url 'viewEvent' event.id  %}" class="btn btn-primary"> Detalhes </a>
                             </div>
                         </div>
                     </div>

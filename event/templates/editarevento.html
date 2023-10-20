@@ -7,7 +7,7 @@
 
 {% block 'content' %}
 <main>    
-    <h1> Evento </h1>
+    <h1> Editar Evento - {{ event.name }} </h1>
     <form  method="POST" action="{% url 'editEvent' event.id %}" enctype="multipart/form-data">
         {% csrf_token %}
             <div class="campo">

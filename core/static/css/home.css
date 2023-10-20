@@ -61,6 +61,11 @@ div#banner > img {
     height: 330px;
 }
 
+div.card {
+    border-radius: 10px;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.482);
+}
+
 /* Media-Query para telas de até 992px */
 
 @media screen and (max-width: 992px) {
