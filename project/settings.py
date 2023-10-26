@@ -1,7 +1,6 @@
 from pathlib import Path
 from decouple import config
 import os
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,10 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool, default=False)
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://eventmanager.fly.dev']
 
 # Application definition
 
@@ -28,9 +26,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'register.apps.RegisterConfig',
     'core.apps.CoreConfig',
+    'register.apps.RegisterConfig',
+    'login.apps.LoginConfig',
+    'userprofile.apps.UserProfileConfig'
 ]
+
+AUTH_USER_MODEL = 'register.CustomUser'
 
 
 MIDDLEWARE = [
@@ -40,7 +42,12 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    #'django.contrib.staticfiles.middleware.StaticFilesMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -61,6 +68,8 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'project.wsgi.application'
 
 
@@ -68,10 +77,15 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'eventmanager',
+        'USER': 'postgres',
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '',
+    }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -83,7 +97,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
         'OPTIONS' : {
-            'min_length': 8, #Define o tamanho mínimo da senha
+            'min_length': 8
         },
     },
     {
@@ -91,14 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-    {
-        'NAME': 'register.validators.UppercaseLowercaseDigitValidator',
-        'OPTIONS': {
-            'min_digits': 1,
-            'min_lower': 1,
-            'min_upper': 1,
-        },
     },
 ]
 
@@ -119,8 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'core/static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

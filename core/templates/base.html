@@ -14,8 +14,20 @@
         <nav>
             <a href = "{% url 'index' %}" id = "logo"> eventManager </a>
             <ul>
-                <li> <a href = "{% url 'register' %}"> <button> Cadastre-se </button> </a> </li>
-                <li> <a href = "#"> <button> Login </button> </a> </li>
+                {% if user.is_authenticated %}
+                    {% if user.isPromoter %}
+                    
+                    <li> <a> <button> Meus Eventos </button> </a> </li>
+                    <li> <a href = "{% url 'profile' %}"> <button> Meu Perfil </button> </a> </li>
+                    <li> <a href = "{% url 'logout' %}"> <button> Sair </button> </a> </li>
+                    {% else %}
+                        <li> <a href = "{% url 'profile' %}"> <button> Meu Perfil </button> </a> </li>
+                        <li> <a href = "{% url 'logout' %}"> <button> Sair </button> </a> </li>
+                    {% endif %}    
+                {% else %}
+                    <li> <a href = "{% url 'register' %}"> <button> Cadastre-se </button> </a> </li>
+                    <li> <a href = "{% url 'login_user' %}"> <button> Login </button> </a> </li>
+                {% endif %}
             </ul>
         </nav>
         {% block 'content' %}

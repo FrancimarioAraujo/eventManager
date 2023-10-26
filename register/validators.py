@@ -1,31 +1,25 @@
-from django.utils.translation import gettext as _
-from django.core.exceptions import ValidationError
 import re
+import phonenumbers
 
-class UppercaseLowercaseDigitValidator:
-    def __init__(self, min_digits=1, min_lower=1, min_upper=1):
-        self.min_digits = min_digits
-        self.min_lower = min_lower
-        self.min_upper = min_upper
 
-    def __call__(self, password):
-        if (
-            len(re.findall(r'[A-Z]', password)) < self.min_upper or
-            len(re.findall(r'[a-z]', password)) < self.min_lower or
-            len(re.findall(r'[0-9]', password)) < self.min_digits
-        ):
-            raise ValidationError(
-                f"A senha deve conter pelo menos {self.min_upper} letra(s) maiúscula(s), "
-                f"{self.min_lower} letra(s) minúscula(s) e {self.min_digits} número(s)."
-            )
+def password_validator(password):
+    # Verifica se a senha tem pelo menos 8 caracteres
+    if len(password) < 8:
+        return False
+    
+    # Verifica se a senha tem pelo menos uma letra maiúscula
+    if not re.search(r'[A-Z]', password):
+        return False
+    
+    # Verifica se a senha tem pelo menos um número
+    if not re.search(r'[0-9]', password):
+        return False
+    
+    return True
 
-class phoneNumberValidator:
-    def validate_phone_number(value):
-        phone_regex = r'^\(?([0-9]{2})\)?[ .-]?([0-9]{4,5})[ .-]?([0-9]{4})$'
-        if re.match(phone_regex, value):
-            return True
-        else:
-            raise ValidationError(
-                _("O número de telefone não é válido. Certifique-se de incluir apenas números"),
-                code='invalid_phone_number'
-            )
+def phone_number_validator(phone):
+    try:
+        number = phonenumbers.parse(phone, "BR")
+        return phonenumbers.is_valid_number(number)
+    except phonenumbers.NumberParseException:
+        return False
