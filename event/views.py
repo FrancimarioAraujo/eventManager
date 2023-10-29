@@ -77,6 +77,9 @@ def deleteEvent(request, event_id):
         return HttpResponse('Você não tem permissão para excluir este evento')
 
     if request.method == 'POST':
+        if event.image:
+            event.image.delete()
+            
         event.delete()
         messages.success(request, 'Evento excluído com sucesso!')
         return redirect('listEvent')

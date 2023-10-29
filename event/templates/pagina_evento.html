@@ -1,16 +1,37 @@
 {% extends 'base.html' %} 
 {% load static %}
 {% block 'head'%}
-    <title> {{ evento.name }} </title>
+    <title> eventManager - {{ evento.name }} </title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/paginaevento.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 {% endblock 'head'%}
 
 {% block 'content' %}
 
-    <h1>{{ evento.name }}</h1>
-
-    <p>Endereço: {{ evento.address }}</p>
-    <p>Data e Hora: {{ evento.dateTime }}</p>
-    <p>Descrição: {{ evento.description }}</p>
-    <p>Valor da Entrada: R$ {{ evento.ticketPrice }}</p> 
+    <main>
+        <div id = "imagem" style = "background: url('{% static evento.image.url %}') no-repeat;">
+            <img src = "{% static evento.image.url %}" alt = "Imagem do Evento">
+        </div>
+        <div id = "informacoes">
+            <h1> {{ evento.name }} </h1>
+            <p>
+                <span class="material-symbols-outlined">calendar_month</span> {{ evento.date }}
+                <br>
+                <span class="material-symbols-outlined">location_on</span> {{ evento.address }}
+            </p>
+            <h2> Descrição do Evento </h2>
+            <p> {{ evento.description }} </p>
+            <p>Valor da Entrada: R$ {{ evento.ticketPrice }}</p>
+            <h2> Sobre o Organizador </h2>
+            <p>
+                <strong> {{ evento.promoter.fullname }} </strong>
+                <br>
+                <h3> Contato </h3>
+                {{ evento.promoter.email }}
+                <br>
+                {{ evento.promoter.phone }}
+            </p>
+        </div>
+    </main> 
 {% endblock 'content' %}

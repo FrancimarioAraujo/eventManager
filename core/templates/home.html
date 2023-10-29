@@ -20,7 +20,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ event.name }}</h5>
                                 <h6 class="card-title">{{ event.date }}</h6>
-                                <a href="{% url 'viewEvent' event.id  %}" class="btn btn-primary"> Detalhes </a>
+                                <a href="{% url 'viewEvent' event.id  %}"> <button id = "btn-detalhes"> Detalhes </button></a>
                             </div>
                         </div>
                     </div>
