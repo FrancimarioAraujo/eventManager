@@ -1,0 +1,33 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block 'head'%}
+    <title> eventManager - Meus Eventos </title>
+    <link rel = "stylesheet" href = "{% static 'css/base.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/meuseventos.css' %}">
+{% endblock 'head'%}
+
+{% block 'content' %}
+
+    <main>
+        <h1> Eventos de {{ user.fullname }} </h1>
+        <ul id = "eventos">
+            {% for evento in eventos  %}
+                <li class = "evento">
+                    <a href = "{% url 'viewEvent' evento.id %}"><img src="{% static evento.image.url %}" alt = "imagem do evento {{ event.name}}" style = "height: 290px; width: 250px;"> </a>
+                    <div id="informacoes">
+                        <h2> {{ evento.name }} </h2>
+                        {{ evento.description }}
+                        <br>
+                        {{ evento.date }}
+                        <br>
+                        <a href = "{% url 'editEvent' evento.id %}"> <button id = "btn-editar-evento"> Editar Evento </button></a>
+                        <a href = "{% url 'delEvent' evento.id %}"> <button id = "btn-excluir-evento"> Excluir Evento </button></a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href = "{% url 'createEvent' %}"> <button id = "btn-cadastrar-evento"> Criar um Novo Evento </button></a>
+    </main>
+    
+    
+ {% endblock 'content' %}

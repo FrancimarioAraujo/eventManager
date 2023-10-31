@@ -57,6 +57,7 @@ input#btn-login {
     margin-top: 20px;
     margin-bottom: 10px;
     border: 1px solid var(--cor02);
+    border-radius: 10px;
     background-color: var(--cor02);
     color: #FFFFFF;
     font-size: 0.8em;

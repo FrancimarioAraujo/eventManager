@@ -1,0 +1,47 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block 'head'%}
+    <title> eventManager - Editar Eventos </title>
+    <link rel = "stylesheet" href = "{% static 'css/base.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/editarevento.css' %}">
+{% endblock 'head'%}
+
+{% block 'content' %}
+<main>    
+    <h1> Editar Evento - {{ event.name }} </h1>
+    <div id="informacoes">
+        <h2> Informações </h2>
+        <form  method="POST" action="{% url 'editEvent' event.id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+                <div class="campo">
+                    <label for="nameEvent"> {{ event.name }} </label>
+                    <input type="text" name="nameEvent" id="nameEvent" placeholder= "Nome do evento" value="{{ event.name }}" >
+                    {% if nameError %}
+                        <div class="error-message">Nome já cadastrado</div>
+                    {% endif %}
+                </div>
+                <div class="campo">
+                    <label for="description"> Descrição:</label>
+                    <textarea rows = "4" col = "50" placeholder = "Descrição do evento" id="description" name="description"> {{ event.description }} </textarea>
+                </div>
+                <div class="campo">
+                    <label for="address"> Endereço: </label>
+                    <input type="text" name="address" id="address" placeholder="Local do evento" value="{{ event.address }}"/>
+                </div>
+                <div class="campo">
+                    <label for="dateTime"> Data e Hora:</label>
+                <input type="datetime-local" id="dateTime" name="dateTime" value="{{ event.date|date:'Y-m-d\TH:i' }}">
+                </div>
+                <div class="campo">
+                    <label for="ticketPrice"> Valor da entrada:</label>
+                    <input type="number" placeholder = "Valor da entrada"  min = "0" id="ticketPrice" name="ticketPrice" value="{{ event.ticketPrice }}">
+                </div>
+                <div class="campo">
+                    <label for="image" class = "visivel"> Imagem:</label>
+                    <input type="file" id="image" name="image">
+                </div>
+                <input type="submit" value="Salvar" id="btn-salvar">
+        </form>
+    </div>
+
+{% endblock 'content' %}

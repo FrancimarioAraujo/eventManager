@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+nav {
+    margin-bottom: 2.1px;
+}
+
+main > div#imagem {
+    background-size: cover;
+    background-position: center center;
+    text-align: center;
+    height: 400px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.492);
+}
+
+div#imagem > img {
+    width: 500px;
+    height: 450px;
+    border-radius: 15px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.492);
+}
+
+div#informacoes {
+    background-color: #FFFFFF;
+    padding: 20px;
+}
+
+div#informacoes > h1 {
+    margin-top: 60px;
+}
+
+div#informacoes > h1, div#informacoes > p, div#informacoes > h2 {
+    margin-bottom: 20px;
+}

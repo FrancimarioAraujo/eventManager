@@ -31,6 +31,7 @@ div#informacoes > a > button {
     width: 150px;
     margin-top: 20px;
     border: 1px solid var(--cor02);
+    border-radius: 10px;
     background-color: var(--cor02);
     color: #FFFFFF;
     font-size: 0.9em;

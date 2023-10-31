@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'register.apps.RegisterConfig',
     'login.apps.LoginConfig',
-    'userprofile.apps.UserProfileConfig'
+    'userprofile.apps.UserProfileConfig',
+    'event.apps.EventConfig',
 ]
 
 AUTH_USER_MODEL = 'register.CustomUser'
@@ -108,6 +109,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+FILE_UPLOAD_HANDLERS = [
+    "django.core.files.uploadhandler.MemoryFileUploadHandler",
+    "django.core.files.uploadhandler.TemporaryFileUploadHandler",
+]
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -126,6 +132,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'core/static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'core/static/media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

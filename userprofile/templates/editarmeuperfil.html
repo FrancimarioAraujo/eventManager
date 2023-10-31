@@ -31,33 +31,24 @@
                     {% if current_password_error %}
                         <div class="error-message">Senha atual está incorreta.</div>
                     {% endif %}
-                    <label for="current_password"> Senha atual: </label>
+                    <label for="current_password" class = "visivel"> Senha atual: </label>
                     <input type="password" id="current_password" name="current_password">
 
-                    <label for="new_password"> Nova senha: </label>
+                    <label for="new_password" class = "visivel"> Nova senha: </label>
                     <input type="password" id="new_password" name="new_password">
                     {% if password_invalid_error %}
                         <div class="error-message">Sua senha deve possuir pelo menos oito caracteres, incluindo letras maiúsculas e minúsculas e números</div>
                     {% endif %}
 
-                    <label for="confirm_new_password"> Confirme a nova senha:</label>
+                    <label for="confirm_new_password" class = "visivel"> Confirme a nova senha: </label>
                     <input type="password" id="confirm_new_password" name="confirm_new_password">
                     {% if password_mismatch_error %}
                         <div class="error-message">As senhas não correspondem.</div>
                     {% endif %}
                 </div>
-                <a href = "{% url 'profile' %}" style = "margin-right: 50%;"> <button id = "btn-cancelar"> Cancelar </button></a>
                 <input type = "submit" value = "Salvar" id = "btn-salvar">
             </form>
-            <div>
-                {% if messages %}
-                    <ul class="messages">
-                        {% for message in messages %}
-                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
+            <a href = "{% url 'profile' %}"> <button id = "btn-cancelar"> Cancelar </button></a>
         </div>
     </main>
 {% endblock 'content' %}

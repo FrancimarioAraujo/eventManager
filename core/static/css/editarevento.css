@@ -17,6 +17,10 @@ div#informacoes > h2 {
     margin-bottom: 20px;
 }
 
+div#informacoes > form > div.campo {
+    margin-bottom: 20px;
+}
+
 div#informacoes > form > div.campo > input {
     width: 100%;
     background-color: #EEEEEE;
@@ -25,7 +29,6 @@ div#informacoes > form > div.campo > input {
     border: none;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.482);
     padding: 5px 15px;
-    margin-bottom: 20px;
 }
 
 div#informacoes > form > div.campo > label {
@@ -34,6 +37,23 @@ div#informacoes > form > div.campo > label {
 
 div#informacoes > form > div.campo > label.visivel {
     display: block;
+}
+
+div.campo > textarea {
+    width: 100%;
+    resize: none;
+    background-color: #EEEEEE;
+    color: rgba(73, 71, 71, 0.806);
+    border-radius: 10px;
+    border: none;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.482);
+    padding: 5px 15px;
+}
+
+div.campo > textarea::placeholder {
+    font-size: 1em;
+    padding: 5px 10px;
+    text-decoration: none;
 }
 
 div#informacoes > form > #btn-salvar {
@@ -53,27 +73,6 @@ div#informacoes > form > #btn-salvar {
 }
 
 div#informacoes > form > #btn-salvar:hover {
-    scale: 1.2;
-    transition: 0.5s;
-}
-
-div#informacoes > a > button#btn-cancelar {
-    height: 40px;
-    width: 150px;
-    margin-top: 20px;
-    border: 1px solid rgb(194, 11, 11);
-    border-radius: 10px;
-    background-color: rgb(194, 11, 11);
-    color: #FFFFFF;
-    font-size: 0.9em;
-    font-weight: bold;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.482);
-    cursor: pointer;
-    scale: 1;
-    transition: 0.5s;
-}
-
-div#informacoes > a > button#btn-cancelar:hover {
     scale: 1.2;
     transition: 0.5s;
 }

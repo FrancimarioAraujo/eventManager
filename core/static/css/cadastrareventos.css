@@ -34,6 +34,11 @@ div.campo > label {
     display: none;
 }
 
+div.campo > label.visivel {
+    display: block;
+    margin-bottom: 10px;
+}
+
 div.campo > input {
     height: 35px;
     width: 250px;
@@ -49,7 +54,23 @@ div.campo > input::placeholder {
     border-bottom: 1px solid #A49D9D;
 }
 
-input#btn-cadastrar {
+div.campo > textarea {
+    width: 250px;
+    resize: none;
+}
+
+div.campo > textarea::placeholder {
+    font-size: 1em;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+div.campo > input[type="file"], div.campo > input[type="file"]::placeholder {
+     border: none;
+     box-shadow: none;
+}
+
+input#btn-event {
     height: 40px;
     width: 150px;
     margin-top: 20px;
@@ -65,7 +86,7 @@ input#btn-cadastrar {
     transition: 0.5s;
 }
 
-input#btn-cadastrar:hover {
+input#btn-event:hover {
     scale: 1.2;
     transition: 0.5s;
 }
