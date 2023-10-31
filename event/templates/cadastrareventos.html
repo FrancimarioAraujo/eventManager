@@ -27,31 +27,64 @@
                 <input type="text" name="address" id="address" placeholder="Local do evento" required/>
             </div>
             <div class="campo">
-                <label for="dateTime"> Data e Hora:</label>
-            <input type="datetime-local" id="dateTime" name="dateTime" required>
+                <label for="dateTime"> Data e Hora de inicio:</label>
+            <input type="datetime-local" id="dateTime" name="start_date" required>
+            </div>
+            <div class="campo">
+                <label for="dateTime"> Data e Hora de término:</label>
+            <input type="datetime-local" id="dateTime" name="end_date" required>
+            </div>
+            <div class="campo">
+                <label for="capacity"> Capacidade suportada:</label>
+                <input type="number" placeholder = "Capacidade"  min = "0" id="capacity" name="capacity">
             </div>
             <div class="campo">
                 <label for="ticketPrice"> Valor da entrada:</label>
                 <input type="number" placeholder = "Valor da entrada"  min = "0" id="ticketPrice" name="ticketPrice">
             </div>
             <div class="campo">
+                <label for="category">Categoria do Evento:</label>
+                <select name="category" id="category" required>
+                    <option value="" disabled selected>Selecione a categoria</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="campo">
                 <label for="image" class = "visivel"> Imagem:</label>
                 <input type="file" id="image" name="image" required>
             </div>
+            {% if imageError %}
+            <div class="error-message">A largura e altura da imagem devem ser no mínimo 300 pixels e apenas JPG e PNG são permitidos</div>
+            {% endif %}
+  
             <input type="submit" value="Criar Evento" id="btn-event">
     </form>
 
+
     {% if messages %}
         {% for message in messages %}
-             {% if message.tags == 'success' %}
-                <div  id="success-message" class="alert-success">
-                     <script src="{% static 'js/cadastroEventos.js' %}"></script>
+            <div class="alert {{message.tags}}" role="alert">
+                {{message}}   
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% comment %} {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div id="success-message" class="alert-success"></div>
+            {% else %}
+                <div class="alert {{message.tags}}" role="alert">
+                    {{message}}   
                 </div>
             {% endif %}
         {% endfor %}
-    {% endif %}
+    {% endif %} {% endcomment %}
 
+
+
+    <script src="{% static 'js/cadastroEventos.js' %}"></script>
 
 </main>
-
 {% endblock 'content'%}

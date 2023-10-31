@@ -13,8 +13,10 @@
             <p> Por favor, confirme se você deseja excluir o evento a seguir: </p>
             <p> <strong> Nome do Evento:</strong> {{ event.name }} </p>
             <p> <strong> Endereço:</strong> {{ event.address }} </p>
-            <p> <strong> Data e Hora:</strong> {{ event.date }} </p>
+            <p> <strong> Data e Hora de inicio:</strong> {{ event.start_date }} </p>
+            <p> <strong> Data e Hora de término:</strong> {{ event.end_date }} </p>
             <p> <strong> Descrição:</strong> {{ event.description }} </p>
+            <p> <strong> Capacidade:</strong> {{ event.capacity }} Pessoas </p>
             <p> <strong> Preço do Ingresso:</strong> R$ {{ event.ticketPrice }} </p>
             <form method = "post" action = "{% url 'delEvent' event.id %}">
                 {% csrf_token %}

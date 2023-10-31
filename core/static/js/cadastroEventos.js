@@ -9,7 +9,7 @@ function showSuccessMessage(message) {
         successMessage.classList.remove('visible');
         successMessage.classList.add('hidden'); 
         setTimeout(function() {
-            window.location.href = "/eventos/mysevents/";
+            window.location.href = "/eventos/myevents/";
         }, 500); 
     }, 3000); 
 }

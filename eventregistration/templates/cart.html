@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chekout - eventManager</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Evento</th>
+            <th>Quantidade</th>
+            <th>Preço</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.event.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>R$ {{ item.event.ticketPrice }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="2">Total</td>
+            <td>R$ {{ total }}</td>
+        </tr>
+    </table>
+
+    <form method="post" action="#">
+        {% csrf_token %}
+        <input type="submit" value="Finalizar Compra">
+    </form>
+</body>
+</html>

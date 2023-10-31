@@ -45,11 +45,12 @@ div.campo > input {
     border: 1px solid #A49D9D;
     border-top: none;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.386);
+    padding: 0px 10px;
 }
 
 div.campo > input::placeholder {
     font-size: 1em;
-    padding: 10px;
+    padding: 10px 0px;
     text-decoration: none;
     border-bottom: 1px solid #A49D9D;
 }
@@ -57,11 +58,11 @@ div.campo > input::placeholder {
 div.campo > textarea {
     width: 250px;
     resize: none;
+    padding: 5px 10px;
 }
 
 div.campo > textarea::placeholder {
     font-size: 1em;
-    padding: 5px 10px;
     text-decoration: none;
 }
 

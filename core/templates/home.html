@@ -8,6 +8,15 @@
 {% endblock 'head' %}
 
 {% block 'content' %}
+    <form action="{% url 'search_events' %}" method="get">
+        <input type="text" name="q" placeholder="Pesquisar eventos por nome ou categoria" required>
+        <select name="search_by">
+            <option value="name">Nome do Evento</option>
+            <option value="category">Categoria</option>
+        </select>
+        <button type="submit">Pesquisar</button>
+    </form>
+
     {% if user.is_authenticated %}
         <div class="container">
             <h1 class="mt-4"> Eventos Disponíveis </h1>
@@ -27,17 +36,6 @@
                 {% endfor %}
             </div>
         </div>
-        
-        {% comment %} <div class="event-cards">
-            {% for event in events %}
-                <a href="{% url 'viewEvent' event.id %}">
-                    <div class="event-card">
-                        <img src="{{ event.image.url }}" alt="{{ event.name }}">
-                        <h2>{{ event.name }}</h2>
-                    </div>
-                </a>
-            {% endfor %}
-        </div> {% endcomment %}
     {% else %}
         <main>    
             <div id = "banner">

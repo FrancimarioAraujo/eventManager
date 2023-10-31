@@ -1,6 +1,7 @@
 from pathlib import Path
 from decouple import config
 import os
+from django.contrib.messages import constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
     'login.apps.LoginConfig',
     'userprofile.apps.UserProfileConfig',
     'event.apps.EventConfig',
+    'eventregistration',
 ]
 
 AUTH_USER_MODEL = 'register.CustomUser'
@@ -140,3 +142,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'core/static/media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Django messages
+
+MESSAGE_TAGS = {
+    constants.DEBUG: '',
+    constants.SUCCESS: 'alert-success',
+    constants.ERROR: 'alert-error',
+    constants.WARNING: 'alert-warning',
+    constants.INFO: '',
+}

@@ -14,6 +14,7 @@ urlpatterns = [
     path('login/', include('login.urls')),
     path('profile/', include('userprofile.urls')),
     path('eventos/', include('event.urls')),
+    path('eventosRegistro/', include('eventregistration.urls')),
 ]
 
 if settings.DEBUG:

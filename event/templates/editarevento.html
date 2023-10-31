@@ -29,8 +29,16 @@
                     <input type="text" name="address" id="address" placeholder="Local do evento" value="{{ event.address }}"/>
                 </div>
                 <div class="campo">
-                    <label for="dateTime"> Data e Hora:</label>
-                <input type="datetime-local" id="dateTime" name="dateTime" value="{{ event.date|date:'Y-m-d\TH:i' }}">
+                    <label for="dateTime"> Data e Hora de inicio:</label>
+                <input type="datetime-local" id="dateTime" name="start_date" value="{{ event.date|date:'Y-m-d\TH:i' }}">
+                </div>
+                <div class="campo">
+                    <label for="dateTime"> Data e Hora de termino:</label>
+                <input type="datetime-local" id="dateTime" name="end_date" value="{{ event.date|date:'Y-m-d\TH:i' }}">
+                </div>
+                <div class="campo">
+                    <label for="capacity"> Capacidade suportada:</label>
+                    <input type="number" placeholder = "Capacidade"  min = "0" id="capacity" name="capacity">
                 </div>
                 <div class="campo">
                     <label for="ticketPrice"> Valor da entrada:</label>

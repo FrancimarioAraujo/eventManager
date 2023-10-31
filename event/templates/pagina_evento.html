@@ -16,7 +16,7 @@
         <div id = "informacoes">
             <h1> {{ evento.name }} </h1>
             <p>
-                <span class="material-symbols-outlined">calendar_month</span> {{ evento.date }}
+                <span class="material-symbols-outlined">calendar_month</span> {{ evento.start_date }} até {{ evento.end_date}}
                 <br>
                 <span class="material-symbols-outlined">location_on</span> {{ evento.address }}
             </p>
@@ -33,5 +33,33 @@
                 {{ evento.promoter.phone }}
             </p>
         </div>
-    </main> 
+
+        <h1>Ingressos</h1>
+        <button onclick="adicionarIngresso()">Adicionar Ingresso (+)</button>
+        <p><span id="quantidade">0</span></p>
+        <button onclick="removerIngresso()">Remover Ingresso (-)</button>
+        <form id="carrinhoForm" method="post" action="{% url 'add_to_cart' evento.id %}">
+            {% csrf_token %}
+            <p>{{evento.ticketPrice}}<p>
+            <input type="hidden" name="quantity" id="quantidadeInput" value="0">
+            <input type="submit" value="Continuar"></input>
+        </form>
+        
+        <script>
+            let quantidadeIngressos = 0;
+        
+            function adicionarIngresso() {
+                quantidadeIngressos++;
+                document.getElementById("quantidade").innerText = quantidadeIngressos;
+                document.getElementById("quantidadeInput").value = quantidadeIngressos;
+            }
+        
+            function removerIngresso() {
+                if (quantidadeIngressos > 0) {
+                    quantidadeIngressos--;
+                    document.getElementById("quantidade").innerText = quantidadeIngressos;
+                    document.getElementById("quantidadeInput").value = quantidadeIngressos;
+                }
+            }
+        </script>
 {% endblock 'content' %}
