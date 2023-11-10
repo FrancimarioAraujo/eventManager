@@ -2,7 +2,6 @@ from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.http import HttpResponse
 from .models import Events, EventCategory
-from eventregistration.models import CartItem
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages import constants
