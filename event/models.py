@@ -13,11 +13,15 @@ class Events(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     description = models.TextField()
+    capacity = models.PositiveIntegerField(null=True)
     image = models.ImageField(upload_to='eventos/')
-    ticketPrice = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    capacity = models.PositiveIntegerField()
     category = models.ForeignKey(EventCategory, null=True, on_delete = models.DO_NOTHING)
     promoter = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
+class Ticket(models.Model):
+    event = models.ForeignKey(Events, on_delete=models.CASCADE)
+    ticket_price = models.DecimalField(max_digits=10, decimal_places=2)
+    qtd_ticket = models.PositiveIntegerField()
+
     def __str__(self):
-        return self.name
+        return f'Ingresso para {self.event.name}'

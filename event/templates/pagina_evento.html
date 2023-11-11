@@ -22,7 +22,7 @@
             </p>
             <h2> Descrição do Evento </h2>
             <p> {{ evento.description }} </p>
-            <p>Valor da Entrada: R$ {{ evento.ticketPrice }}</p>
+            <p>Valor da Entrada: R$ {{ ticket }}</p>
             <h2> Sobre o Organizador </h2>
             <p>
                 <strong> {{ evento.promoter.fullname }} </strong>
@@ -38,16 +38,16 @@
         <button onclick="adicionarIngresso()">Adicionar Ingresso (+)</button>
         <p><span id="quantidade">0</span></p>
         <button onclick="removerIngresso()">Remover Ingresso (-)</button>
-        <form id="carrinhoForm" method="post" action="{% url 'add_to_cart' evento.id %}">
+        <form id="cartForm" method="post" action="{% url 'add_to_cart' evento.id %}">
             {% csrf_token %}
-            <p>{{evento.ticketPrice}}<p>
+            <p>{{ticket}}<p>
             <input type="hidden" name="quantity" id="quantidadeInput" value="0">
             <input type="submit" value="Continuar"></input>
         </form>
         
         <script>
             let quantidadeIngressos = 0;
-        
+
             function adicionarIngresso() {
                 quantidadeIngressos++;
                 document.getElementById("quantidade").innerText = quantidadeIngressos;

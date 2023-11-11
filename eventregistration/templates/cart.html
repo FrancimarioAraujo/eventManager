@@ -1,31 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Chekout - eventManager</title>
-</head>
-<body>
-    <table>
-        <tr>
-            <th>Evento</th>
-            <th>Quantidade</th>
-            <th>Preço</th>
-        </tr>
-        {% for item in items %}
-        <tr>
-            <td>{{ item.event.name }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>R$ {{ item.event.ticketPrice }}</td>
-        </tr>
-        {% endfor %}
-        <tr>
-            <td colspan="2">Total</td>
-            <td>R$ {{ total }}</td>
-        </tr>
-    </table>
+<h1>Ingressos</h1>
+<button onclick="adicionarIngresso()">Adicionar Ingresso (+)</button>
+<p><span id="quantidade">0</span></p>
+<button onclick="removerIngresso()">Remover Ingresso (-)</button>
+<form id="cartForm" method="post" action="{% url 'add_to_cart' ticket.id %}">
+    {% csrf_token %}
+    <p>{{ticket.ticket_price}}<p>
+    <input type="hidden" name="quantity" id="quantidadeInput" value="0">
+    <input type="submit" value="Continuar"></input>
+</form>
 
-    <form method="post" action="#">
-        {% csrf_token %}
-        <input type="submit" value="Finalizar Compra">
-    </form>
-</body>
-</html>
+<script>
+    let quantidadeIngressos = 0;
+
+    function adicionarIngresso() {
+        quantidadeIngressos++;
+        document.getElementById("quantidade").innerText = quantidadeIngressos;
+        document.getElementById("quantidadeInput").value = quantidadeIngressos;
+    }
+
+    function removerIngresso() {
+        if (quantidadeIngressos > 0) {
+            quantidadeIngressos--;
+            document.getElementById("quantidade").innerText = quantidadeIngressos;
+            document.getElementById("quantidadeInput").value = quantidadeIngressos;
+        }
+    }
+</script>

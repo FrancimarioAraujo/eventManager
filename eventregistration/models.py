@@ -1,23 +1,18 @@
 from django.db import models
-from event.models import Events, CustomUser
+from event.models import CustomUser, Events
 
+class Pedido(models.Model):
+    usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    evento = models.ForeignKey(Events, on_delete=models.CASCADE)
+    quantidade = models.PositiveIntegerField()
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    email = models.EmailField(max_length=254, null=True)
+    endereco_entrega = models.CharField(max_length=200)
+    cidade_entrega = models.CharField(max_length=100)
+    estado_entrega = models.CharField(max_length=50)
+    cep_entrega = models.CharField(max_length=20)
+    status = models.CharField(max_length=20, choices=[('Concluído', 'Concluído'), ('Em Processamento', 'Em Processamento')])
 
-class Order(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    items = models.ManyToManyField('CartItem')
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
-    #date = models.DateTimeField()
+    def __str__(self):
+        return f'Pedido {self.id} - {self.usuario.username}'
 
-class CartItem(models.Model):
-    cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
-    event = models.ForeignKey(Events, on_delete=models.CASCADE)  
-    quantity = models.PositiveIntegerField(default=1)
-
-class Cart(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    order = models.OneToOneField(Order, null=True, blank=True, on_delete=models.SET_NULL)
-
-class CheckoutForm(models.Model):
-    payment_method = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
-    email = models.EmailField(max_length=254)
