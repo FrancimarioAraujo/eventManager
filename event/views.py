@@ -68,39 +68,32 @@ def createEvent(request):
 @login_required
 def editEvent(request, event_id):
     event = Events.objects.get(id=event_id)
+    ticket = Ticket.objects.get(event=event)
 
     if request.user != event.promoter:
         return HttpResponse('Você não tem permissão para editar este evento')
 
     if request.method == 'POST':
-        new_capacity = int(request.POST.get('capacity'))
-        old_capacity = int(event.capacity)
+        capacity = int(request.POST.get('capacity'))
+        ticket_price = request.POST.get('ticketPrice')
 
         event.name = request.POST.get('nameEvent')
         event.address = request.POST.get('address')
         event.start_date = timezone.make_aware(timezone.datetime.strptime(request.POST.get('start_date'), "%Y-%m-%dT%H:%M"))
         event.end_date = timezone.make_aware(timezone.datetime.strptime(request.POST.get('end_date'), "%Y-%m-%dT%H:%M"))
-        event.capacity = new_capacity
+        event.capacity = capacity
         event.description = request.POST.get('description')
-        event.ticketPrice = request.POST.get('ticketPrice')
+        ticket.ticket_price = ticket_price
 
         if request.FILES.get('image'):
             event.image = request.FILES.get('image')
         event.save()
 
-        # Atualizar os ingressos associados ao evento
-        tickets = Ticket.objects.filter(event=event)
-
-        if new_capacity > old_capacity:
-            # Se a nova capacidade for maior, adiciona novos ingressos
-            for _ in range(new_capacity - old_capacity):
-                ticket = Ticket(event=event, ticket_price=event.ticketPrice, qtd_ticket=1)
-                ticket.save()
-        elif new_capacity < old_capacity:
-            # Se a nova capacidade for menor, exclui ingressos excedentes
-            for _ in range(old_capacity - new_capacity):
-                ticket = tickets.last()
-                ticket.delete()
+        capacity_difference = capacity - event.capacity
+        if ticket:
+            ticket.ticket_price = ticket_price
+            ticket.qtd_ticket = max(0, ticket.qtd_ticket + capacity_difference)
+            ticket.save()
             
         messages.success(request, 'Evento editado com sucesso!')
         return redirect('listEvent')
@@ -119,7 +112,6 @@ def deleteEvent(request, event_id):
         if event.image:
             event.image.delete()
 
-        # Deletar os ingressos associados ao evento
         tickets = Ticket.objects.filter(event=event)
         for ticket in tickets:
             ticket.delete()

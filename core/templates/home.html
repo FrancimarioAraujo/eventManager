@@ -10,10 +10,6 @@
 {% block 'content' %}
     <form action="{% url 'search_events' %}" method="get">
         <input type="text" name="q" placeholder="Pesquisar eventos por nome ou categoria" required>
-        <select name="search_by">
-            <option value="name">Nome do Evento</option>
-            <option value="category">Categoria</option>
-        </select>
         <button type="submit">Pesquisar</button>
     </form>
 
