@@ -3,17 +3,28 @@
 {% block 'head' %}
     <title> Confirmação de Pedido </title>
     <link rel = "stylesheet" href = "{% static 'css/base.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/pedidoconfirmado.css' %}">
 {% endblock 'head' %}
 
 {% block 'content' %}
-<h2>Confirmação de Pedido - EventManager</h2>
-    <p>Olá {{ pedido.usuario }},</p>
-    <p>Seu pedido foi confirmado. Abaixo estão os detalhes do pedido:</p>
-    <h3>Compra Concluída com Sucesso!</h3>
-    <p>Obrigado por sua compra. Aqui estão os detalhes do seu pedido:</p>
-    <p>Número do Pedido: {{ pedido.id }}</p>
-    <p>Evento: {{ pedido.evento.name }}</p>
-    <p>Quantidade: {{ pedido.quantidade }}</p>
-    <p>Total do Pedido: R$ {{ pedido.total }}</p>
-    <p>Obrigado por escolher o EventManager!</p>
+    <main>
+        <h2> Pedido Confirmado </h2>
+        <div id="mensagem">
+            <p>Olá {{ pedido.usuario }},</p>
+            <p>Seu pedido foi confirmado. Abaixo estão os detalhes do pedido:</p>
+            <div id = "sucess">
+                <img src = "{% static 'img/icon.png' %}" alt = "Ícone de Sucesso">
+                <h3>Compra Concluída com Sucesso!</h3>
+            </div>
+        </div>
+        <div id="informacoes">
+            <h3> Informações da Compra </h3>
+            <p>Obrigado por sua compra. Aqui estão os detalhes do seu pedido:</p>
+            <p>Número do Pedido: {{ pedido.id }}</p>
+            <p>Evento: {{ pedido.evento.name }}</p>
+            <p>Quantidade: {{ pedido.quantidade }}</p>
+            <p>Total do Pedido: R$ {{ pedido.total }}</p>
+            <p>Obrigado por escolher o eventManager!</p>
+        </div>
+    </main>
 {% endblock 'content' %}

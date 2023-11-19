@@ -67,9 +67,6 @@
           </div>
 
         </div>
-        <label>
-          <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
-        </label>
         <input type="submit" value="Finalizar" class="btn">
       </form>
     </div>
@@ -83,7 +80,7 @@
       {% for item in items %}
         </span>
       </h4>
-        <p><b>{{ item.quantity }}</b> <span class="price">R$ {{ item.price }}</span></p>
+        <p><b>{{ item.quantity }}x</b> <span class="price">R$ {{ item.price }}</span></p>
       {% endfor %}
       <hr>
       <p>Total <span class="price" style="color:black"><b>R$ {{ total }}</b></span></p>

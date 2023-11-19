@@ -10,6 +10,7 @@ main > div#imagem {
     text-align: center;
     height: 400px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.492);
+    backdrop-filter: blur(10px);
 }
 
 div#imagem > img {
@@ -30,4 +31,54 @@ div#informacoes > h1 {
 
 div#informacoes > h1, div#informacoes > p, div#informacoes > h2 {
     margin-bottom: 20px;
+}
+
+div#informacoes > div#ingressos {
+    border: 1px solid rgba(0, 0, 0, 0.246);
+    border-radius: 5px;
+    width: 300px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.482);
+}
+
+div#informacoes > div#ingressos > form, div#botoes {
+    padding: 10px 20px;
+}
+
+div#informacoes > div#ingressos > h1 {
+    background-color: var(--cor02);
+    color: #FFFFFF;
+    text-align: center;
+}
+
+div#informacoes > div#ingressos > div#botoes > button {
+    background-color: var(--cor02);
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--cor02);
+    border-radius: 100%;
+    color: #FFFFFF;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+input#btn-comprar {
+    height: 40px;
+    width: 150px;
+    margin-top: 20px;
+    border: 1px solid var(--cor02);
+    border-radius: 10px;
+    background-color: var(--cor02);
+    color: #FFFFFF;
+    font-size: 0.8em;
+    font-weight: bold;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.482);
+    cursor: pointer;
+    scale: 1;
+    transition: 0.5s;
+}
+
+input#btn-comprar:hover {
+    scale: 1.2;
+    transition: 0.5s;
 }

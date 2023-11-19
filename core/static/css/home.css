@@ -91,6 +91,38 @@ button#btn-detalhes:hover {
     transition: 0.5s;
 }
 
+div#search-bar {
+    display: flex;
+    gap: 10px;
+    margin: 20px;
+    width: 400px;
+    border: 1px solid #A49D9D;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.386);
+    padding: 0px 10px;
+}
+
+div#search-bar > img {
+    width: 25px;
+    height: 25px;
+}
+
+div#search-bar > input {
+    border: none;
+    width: 400px;
+    background-color: #FFFFFF;
+}
+
+div#search-bar > input::placeholder {
+    font-size: 1em;
+    padding: 10px 0px;
+    text-decoration: none;
+}
+
+div#search-bar > input:focus-visible {
+    outline: none;
+}
 
 /* Media-Query para telas de até 992px */
 
