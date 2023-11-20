@@ -55,7 +55,7 @@ def process_payment(request):
             evento = evento_item
             quantidade = item['quantity']
 
-            # Verifique se há ingressos disponíveis
+            # Verifica se há ingressos disponíveis
             if evento.ticket_set.filter(qtd_ticket__gte=quantidade).exists():
                 # Atualize a quantidade de ingressos no banco de dados
                 ingresso = evento.ticket_set.first()
@@ -64,7 +64,7 @@ def process_payment(request):
 
                 # Cria um pedido relacionado ao usuário
                 pedido = Pedido.objects.create(
-                    usuario=request.user,  # Substitua isso pelo usuário real
+                    usuario=request.user,
                     evento=evento,
                     quantidade=quantidade,
                     total= total,
@@ -73,14 +73,13 @@ def process_payment(request):
                     cidade_entrega=cidade,
                     estado_entrega=estado,
                     cep_entrega=cep,
-                    status='Concluído'  # Pode adicionar mais status se necessário
+                    status='Concluído' 
                 )
 
         # Limpa o carrinho após o pagamento ser concluído
         request.session['cart'] = []
         request.session.modified = True
 
-        # Redireciona para a página de sucesso com informações do pedido
         messages.success(request, 'Compra realizada com sucesso!')
         return redirect('success_page')
 
