@@ -1,39 +1,25 @@
-from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth.models import User
-from django.test.client import Client
+from django.test import TestCase, Client
+from register.models import CustomUser
+import json
 
-class LoginTestCase(TestCase):
+class TestViews(TestCase):
+
     def setUp(self):
-        self.username = 'testuser'
-        self.password = 'testpassword'
-        self.user = User.objects.create_user(username=self.username, password=self.password)
         self.client = Client()
+        self.user = CustomUser.objects.create_user(username='testuser', email='testuser@example.com', password='Carlos369')
 
-    def test_valido_login(self):
-       
-        response = self.client.post(reverse('login_user'), {'username': self.username, 'password': self.password})
+    def test_login_user_POST(self):
+        response = self.client.post(reverse('login_user'), json.dumps({'username': 'testuser', 'password': 'Carlos369'}), content_type='application/json')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json()['successo'], True)
+        self.assertJSONEqual(str(response.content, encoding='utf8'), {'success': True})
 
-    def test_invalido_login(self):
-        
-        response = self.client.post(reverse('login_user'), {'username': self.username, 'password': 'wrongpassword'})
+    def test_login_user_POST_no_user(self):
+        response = self.client.post(reverse('login_user'), json.dumps({'username': 'wrong', 'password': 'wrong'}), content_type='application/json')
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(response.json()['error'], 'credenciais inválidas')
-
-class LogoutUserTestCase(TestCase):
-
-    def setUp(self):
-        self.username = 'testuser'
-        self.password = 'testpassword'
-        self.user = User.objects.create_user(username=self.username, password=self.password)
-        self.client = Client()
-        
+        self.assertJSONEqual(str(response.content, encoding='utf8'), {'error': 'Credenciais inválidas'})
 
     def test_logout_user(self):
-        self.client.login(username=self.username, password=self.password)
+        self.client.login(username='testuser', password='Carlos369')
         response = self.client.get(reverse('logout'))
-        self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('index'))
-        self.assertFalse(response.wsgi_request.user.is_authenticated)

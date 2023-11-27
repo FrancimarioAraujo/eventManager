@@ -1,72 +1,94 @@
+import json
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth.models import User
+from .models import CustomUser
 
-class RegisterTestCase(TestCase):
+class TestesRegisterView(TestCase):
+    
 
-    def test_register_post(self):
-        
-
+    def test_post_register_view_sucesso(self):
+        # Testa a requisição POST para a view de registro com dados válidos
         data = {
-            'username': 'usuario_teste',
-            'fullname': 'nome completo',
-            'phone': '12345678901',
-            'e-mail': 'teste@email.com',
-            'password': 'Senha123',
-            'isPromoter': 'true',
+            'username': 'testuser',
+            'fullname': 'Teste Usuário',
+            'phone': '1234567890',
+            'email': 'testuser@example.com',
+            'password': 'TestPass123',
+            'isPromoter': False,
         }
-
-        response = self.client.post(reverse('register'), data)
-
+        response = self.client.post(reverse('register'), data=json.dumps(data), content_type='application/json')
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), {'success': True})
 
-
-    
-    def test_duplicate_username(self):
-        User.objects.create_user(username='usuario_teste', password='Senha123', email='teste@email.com')
-
-        new_user_data = {
-            'username': 'usuario_teste',
-            'fullname': 'novo nome completo',
-            'phone': '9876543210',
-            'e-mail': 'novo@email.com',
-            'password': 'NovaSenha123',
-            'isPromoter': 'false',
+    def test_post_register_view_username_duplicado(self):
+        # Testa a requisição POST para a view de registro com um nome de usuário duplicado
+        CustomUser.objects.create(username='existinguser', email='existinguser@example.com')
+        data = {
+            'username': 'existinguser',
+            'fullname': 'Teste Usuário',
+            'phone': '1234567890',
+            'email': 'testuser@example.com',
+            'password': 'TestPass123',
+            'isPromoter': False,
         }
+        response = self.client.post(reverse('register'), data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), {'error': {'username': 'Nome de usuário já existe'}})
 
-        response = self.client.post(reverse('register'), new_user_data)
-
-        self.assertEqual(response.status_code, 200)
-
-
-    def test_duplicate_email(self):
-        User.objects.create_user(username='usuario_teste', password='Senha123', email='teste@email.com')
-        
-        new_user_data = {
-            'username': 'novo_usuario',
-            'fullname': 'novo nome completo',
-            'phone': '9876543210',
-            'e-mail': 'teste@email.com',
-            'password': 'NovaSenha123',
-            'isPromoter': 'false',
+    def test_post_register_view_email_duplicado(self):
+        # Testa a requisição POST para a view de registro com um email duplicado
+        CustomUser.objects.create(username='existinguser', email='existinguser@example.com')
+        data = {
+            'username': 'testuser',
+            'fullname': 'Teste Usuário',
+            'phone': '1234567890',
+            'email': 'existinguser@example.com',  # Email duplicado
+            'password': 'TestPass123',
+            'isPromoter': False,
         }
-        response = self.client.post(reverse('register'), new_user_data)
+        response = self.client.post(reverse('register'), data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), {'error': {'email': 'Este e-mail já está cadastrado'}})
 
-        self.assertEqual(response.status_code, 200)
+    def test_post_register_view_senha_invalida(self):
+        # Testa a requisição POST para a view de registro com uma senha inválida
+        data = {
+            'username': 'testuser',
+            'fullname': 'Teste Usuário',
+            'phone': '1234567890',
+            'email': 'testuser@example.com',
+            'password': 'senhafraca',  # Senha inválida
+            'isPromoter': False,
+        }
+        response = self.client.post(reverse('register'), data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), {'error': {'password': 'Sua senha deve possuir pelo menos oito caracteres, incluindo letras maiúsculas e minúsculas e números'}})
 
-    
+    def test_post_register_view_telefone_invalido(self):
+        # Testa a requisição POST para a view de registro com um telefone inválido
+        data = {
+            'username': 'testuser',
+            'fullname': 'Teste Usuário',
+            'phone': '123',  # Telefone inválido
+            'email': 'testuser@example.com',
+            'password': 'TestPass123',
+            'isPromoter': False,
+        }
+        response = self.client.post(reverse('register'), data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), {'error': {'phone': 'Número de telefone inváilido'}})
 
-    
-        
-
-
-        
-
-        
-
-        
-
-
-    
-            
-
+    def test_post_register_view_usuario_existente(self):
+        # Testa a requisição POST para a view de registro com um usuário existente
+        CustomUser.objects.create(username='existinguser', email='existinguser@example.com')
+        data = {
+            'username': 'existinguser',
+            'fullname': 'Teste Usuário',
+            'phone': '1234567890',
+            'email': 'testuser@example.com',
+            'password': 'TestPass123',
+            'isPromoter': False,
+        }
+        response = self.client.post(reverse('register'), data=json.dumps(data), content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json(), {'error': {'username': 'Nome de usuário já existe'}})
