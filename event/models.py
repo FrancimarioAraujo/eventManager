@@ -10,6 +10,8 @@ class EventCategory(models.Model):
 class Events(models.Model): 
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=200, null=True, blank=True)
+    city = models.CharField(max_length=50, null=True, blank=True)
+    state = models.CharField(max_length=50, null=True, blank=True)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     description = models.TextField()
@@ -17,6 +19,9 @@ class Events(models.Model):
     image = models.ImageField(upload_to='eventos/')
     category = models.ForeignKey(EventCategory, null=True, on_delete = models.DO_NOTHING)
     promoter = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 class Ticket(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE)

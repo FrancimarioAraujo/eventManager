@@ -15,6 +15,7 @@ urlpatterns = [
     path('profile/', include('userprofile.urls')),
     path('eventos/', include('event.urls')),
     path('eventosRegistro/', include('eventregistration.urls')),
+    path('meus-pedidos/', include('orders.urls')),
 ]
 
 if settings.DEBUG:

@@ -12,6 +12,7 @@ class Pedido(models.Model):
     estado_entrega = models.CharField(max_length=50)
     cep_entrega = models.CharField(max_length=20)
     status = models.CharField(max_length=20, choices=[('Concluído', 'Concluído'), ('Em Processamento', 'Em Processamento')])
+    dataCompra = models.DateField(auto_now_add=True, null=True)
 
     def __str__(self):
         return f'Pedido {self.id} - {self.usuario.username}'

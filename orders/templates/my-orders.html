@@ -1,0 +1,18 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block 'head'%}
+    <title> eventManager - Meus Pedios </title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock 'head'%}
+{% block 'content' %}
+    {% for pedido in pedido %}
+        {{pedido.evento}}
+        {{pedido.total}}
+        {{pedido.usuario}}
+        {{pedido.status}}
+        {{pedido.quantidade}}
+        {{pedido.dataCompra}}
+        <a href = "#"> <button id = "btn-avaliar-evento"> Avaliar Evento </button></a>
+    {% endfor %}
+
+{% endblock 'content' %}

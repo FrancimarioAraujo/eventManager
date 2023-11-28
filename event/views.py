@@ -31,6 +31,8 @@ def createEvent(request):
         nameEvent = request.POST.get('nameEvent')
         description = request.POST.get('description')
         address = request.POST.get('address')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
         capacity = request.POST.get('capacity')
@@ -47,8 +49,9 @@ def createEvent(request):
         #     return render(request, 'cadastrareventos.html', {'imageError': True})
     
         if not Events.objects.filter(name = nameEvent).exists():
-            event = Events(name=nameEvent, address=address, start_date=start_date, end_date=end_date, capacity=capacity, 
-                           description=description, image=image, promoter=promoter, category=category)
+            event = Events(name=nameEvent, address=address, city=city, state=state, start_date=start_date, 
+                           end_date=end_date, capacity=capacity, description=description, image=image, 
+                           promoter=promoter, category=category)
             event.save()
             # Criação de ingressos associados ao evento
             ticket = Ticket(event=event, ticket_price=price, qtd_ticket=capacity)
@@ -79,6 +82,8 @@ def editEvent(request, event_id):
 
         event.name = request.POST.get('nameEvent')
         event.address = request.POST.get('address')
+        event.city = request.POST.get('city')
+        event.state = request.POST.get('state')
         event.start_date = timezone.make_aware(timezone.datetime.strptime(request.POST.get('start_date'), "%Y-%m-%dT%H:%M"))
         event.end_date = timezone.make_aware(timezone.datetime.strptime(request.POST.get('end_date'), "%Y-%m-%dT%H:%M"))
         event.capacity = capacity

@@ -17,10 +17,58 @@
         </div>
     </form>
 
+    <div id="btn-location">
+        <button id="local">Selecione uma localização</button>
+        <img src = "{% static 'img/localizacao.png' %}" alt = "Ícone de localização">
+    </div>
+    
+    <form action="{% url 'search_location' %}" method="get">
+        <div id="modal" class="modal">
+            <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Localização</h2>
+            <input type="text" id="searchInput" name="location" placeholder="Onde?">
+            <ul id="locationList">
+            </ul>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        // Obter o modal
+        var modal = document.getElementById('modal');
+
+        // Obter o botão que abre o modal
+        var btn = document.getElementById('local');
+
+        // Quando o usuário clicar no botão, abrir o modal
+        btn.onclick = function() {
+        modal.style.display = 'block';
+        };
+
+        // Quando o usuário clicar no 'X', fechar o modal
+        var span = document.getElementsByClassName('close')[0];
+        span.onclick = function() {
+        modal.style.display = 'none';
+        };
+
+        // Fecha o modal se o usuário clicar fora da área do modal
+        window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+        };
+
+    </script>
+      
+
     {% if user.is_authenticated %}
         <div class="container">
-            <h1 class="mt-4"> Eventos Disponíveis </h1>
-    
+            {% if query %}
+                <h1 class="mt-4"> Eventos Disponíveis - {{query}} </h1>
+            {% else %}
+                <h1 class="mt-4"> Eventos Disponíveis </h1>
+            {% endif %}
             <div class="row">
                 {% for event in events %}
                     <div class="col-md-4">
