@@ -20,6 +20,12 @@ class Events(models.Model):
     category = models.ForeignKey(EventCategory, null=True, on_delete = models.DO_NOTHING)
     promoter = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
+    ACTIVE = 'active'
+    CLOSED = 'closed'
+    EVENT_STATUS_CHOICES = [(ACTIVE, 'Active'), (CLOSED, 'Closed')]
+
+    status = models.CharField(max_length=10, choices=EVENT_STATUS_CHOICES, default=ACTIVE)
+
     def __str__(self):
         return self.name
 

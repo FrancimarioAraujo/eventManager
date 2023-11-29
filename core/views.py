@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.http import JsonResponse
 
 def home(request):
-    events = Events.objects.all()
+    events = Events.objects.all().filter(status = 'active')
     return render(request, 'home.html', {'events': events})
 
 

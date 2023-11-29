@@ -18,10 +18,11 @@
                         <h2> {{ evento.name }} </h2>
                         {{ evento.description }}
                         <br>
-                        {{ evento.start_date }}
+                        {{ evento.start_date }} -
                         {{ evento.end_date }}
                         <br>
                         <a href = "{% url 'editEvent' evento.id %}"> <button id = "btn-editar-evento"> Editar Evento </button></a>
+                        <a href = "{% url 'closeEvent' evento.id %}"> <button id = "btn-encerrar-evento"> Encerrar Evento </button></a>
                         <a href = "{% url 'delEvent' evento.id %}"> <button id = "btn-excluir-evento"> Excluir Evento </button></a>
                     </div>
                 </li>

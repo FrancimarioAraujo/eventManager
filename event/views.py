@@ -61,8 +61,6 @@ def createEvent(request):
 
             return redirect('listEvent')
         else:
-            #messages.add_message(request, constants.WARNING, 'Nome do evento já está cadastado!')
-            #return redirect('createEvent')
             return render(request, 'cadastrareventos.html', {'categories': categories, 'nameError': True})
 
     else:
@@ -126,4 +124,17 @@ def deleteEvent(request, event_id):
         return redirect('listEvent')
 
     return render(request, 'excluirevento.html', {'event': event})
+
+@login_required
+def closeEvent(request, event_id):
+    event = Events.objects.get(pk=event_id)
+
+    if event.end_date < timezone.now():
+        event.status = Events.CLOSED
+        event.save()
+    
+        return redirect('viewEvent', event_id)
+    
+
+    return render(request, 'meuseventos.html')
 
