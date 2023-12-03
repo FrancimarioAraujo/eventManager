@@ -14,44 +14,66 @@
             <img src = "{% static evento.image.url %}" alt = "Imagem do Evento">
         </div>
         <div id = "informacoes">
-            <h1> {{ evento.name }} </h1>
-            <p>
-                <span class="material-symbols-outlined">calendar_month</span> {{ evento.start_date }} até {{ evento.end_date}}
-                <br>
-                <span class="material-symbols-outlined">location_on</span> {{ evento.address }}
-            </p>
-            <h2> Descrição do Evento </h2>
-            <p> {{ evento.description }} </p>
-            <p>Valor da Entrada: R$ {{ ticket }}</p>
-            <h2> Sobre o Organizador </h2>
-            <p>
-                <strong> {{ evento.promoter.fullname }} </strong>
-                <br>
-                <h3> Contato </h3>
-                {{ evento.promoter.email }}
-                <br>
-                {{ evento.promoter.phone }}
-            </p>
+            <div id="descricao-evento">
+                <h1> {{ evento.name }} </h1>
+                <p>
+                    <span class="material-symbols-outlined">calendar_month</span> {{ evento.start_date }} até {{ evento.end_date}}
+                    <br>
+                    <span class="material-symbols-outlined">location_on</span> {{ evento.address }}
+                </p>
+                <h2> Descrição do Evento </h2>
+                <p> {{ evento.description }} </p>
+                <p>Valor da Entrada: R$ {{ ticket }}</p>
+                <h2> Sobre o Organizador </h2>
+                <p>
+                    <strong> {{ evento.promoter.fullname }} </strong>
+                    <br>
+                    <h3> Contato </h3>
+                    {{ evento.promoter.email }}
+                    <br>
+                    {{ evento.promoter.phone }}
+                </p>
+            </div>
+       
         
             <div id = "ingressos">
                 <h1>Ingressos</h1>
                 <div id="botoes">
-                    <button onclick="adicionarIngresso()">+</button>
-                    <p><span id="quantidade">0</span></p>
                     <button onclick="removerIngresso()">-</button>
+                    <p><span id="quantidade">0</span></p>
+                    <button onclick="adicionarIngresso()">+</button>
                 </div>
                 <form id="cartForm" method="post" action="{% url 'add_to_cart' evento.id %}">
                     {% csrf_token %}
                     <p>{{evento.name}}</p>
-                    <p>Preço único de R$ {{ticket}}<p>
+                    <p>Preço único de <span id="preco">R$ {{ticket}}<span><p>
                     <input type="hidden" name="quantity" id="quantidadeInput" value="0">
                     <input type="submit" value="Comprar Ingressos" id = "btn-comprar"></input>
                 </form>
             </div>
         
         </div>
-
         
+        <div id = "avaliacoes"> 
+            <h1 id="avaliacoes"> Avaliações </h1>
+            {% if avaliacao %}
+                {% for avaliacao in avaliacao %}
+                    <label id="usuario">{{avaliacao.usuario}}</label> -
+                    <label id="titulo">{{avaliacao.titulo}}</label>
+                    <p id="descricao">{{avaliacao.descricao}}<p>
+                    </br>
+                    <div id='star'>
+                    {% for i in "*****" %}
+                        {% if forloop.counter <= avaliacao.qualidade %}
+                            <img src="{% static 'img/star.png' %}">
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p> Este evento não possui avaliações </p>
+            {% endif %}
+        </div>
         
         <script>
             let quantidadeIngressos = 0;

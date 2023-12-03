@@ -124,6 +124,23 @@ div#search-bar > input:focus-visible {
     outline: none;
 }
 
+div#btn-location {
+    margin: 20px;
+    display: flex;
+}
+
+div#btn-location > img {
+    width: 25px;
+    height: 25px;
+}
+
+button#local {
+    border: none;
+    border-radius: 10px;
+    width: 200px;
+    margin-left: 0px;
+}
+
 /* Estilos para o modal */
 .modal {
     display: none;
@@ -159,8 +176,16 @@ div#search-bar > input:focus-visible {
     text-decoration: none;
     cursor: pointer;
   }
-  
 
+ul#locationList {
+    list-style-image: url("../img/navegacao-gps.png");
+}
+
+ul#locationList > li {
+    font-size: 1.2em;
+    margin: 20px;
+    cursor: pointer;
+}
 
 /* Media-Query para telas de até 992px */
 

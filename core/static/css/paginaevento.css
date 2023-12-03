@@ -21,8 +21,41 @@ div#imagem > img {
 }
 
 div#informacoes {
+   
+    display: flex;
     background-color: #FFFFFF;
     padding: 20px;
+}
+
+
+#preco{
+    color:green;
+    font-weight: bold;
+}
+
+#descricao-evento {
+    flex: 3; 
+    box-sizing: border-box;
+    min-height: 300px; 
+}
+
+#ingressos {
+    flex: 1; /* Occupy 50% of the width */
+    box-sizing: border-box; /* Include padding in the width */
+}
+
+#descricao-evento, #ingressos {
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+
+/* Additional styling as needed */
+#descricao-evento h1, #ingressos h1 {
+    color: #333; /* Example text color */
+}
+
+#descricao-evento p, #ingressos p {
+    margin-bottom: 15px; /* Adjust the margin as needed */
 }
 
 div#informacoes > h1 {
@@ -39,6 +72,20 @@ div#informacoes > div#ingressos {
     width: 300px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.482);
 }
+#botoes {
+    display: flex;
+    align-items: center; 
+}
+
+#botoes button {
+    margin: 0 5px; 
+}
+
+#botoes p {
+    margin: 0; 
+}
+
+
 
 div#informacoes > div#ingressos > form, div#botoes {
     padding: 10px 20px;
@@ -81,4 +128,39 @@ input#btn-comprar {
 input#btn-comprar:hover {
     scale: 1.2;
     transition: 0.5s;
+}
+
+#avaliacoes {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+#avaliacoes h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+#usuario {
+    font-weight: bold;
+    color: #555;
+    color: #007bff;
+}
+
+#titulo {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0b3562;
+}
+
+#descricao {
+    color: #666;
+}
+
+div#star > img {
+    width: 25px;
+    height: 25px;
+    margin-bottom: 20px;
 }

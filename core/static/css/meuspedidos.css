@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+div.pedido {
+    width: 80%;
+    margin: 20px auto;
+    border: 2px solid rgba(82, 80, 80, 0.308);
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.446);
+    font-weight: bold;
+}
+
+#pedido-header {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.title, .value {
+    grid-row: 2;
+}
+
+.title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+div.pedido > div#pedido-header {
+    background-color: var(--cor02);
+    color: #FFFFFF;
+    padding: 10px;
+    border-top: 1px solid var(--cor02);
+    border-radius: 8px;
+}
+
+div.pedido > div#pedido-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+div.pedido > div#pedido-content > img {
+    width: 200px;
+    height: 200px;
+}
+
+button#btn-avaliar-evento {
+    height: 40px;
+    width: 150px;
+    margin-left: 20px;
+    background-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.483);
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    scale: 1;
+    transition: 0.5s;
+}
+
+button#btn-avaliar-evento:hover {
+    scale: 1.2;
+    transition: 0.5s;
+}

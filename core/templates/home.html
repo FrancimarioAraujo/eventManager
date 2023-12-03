@@ -18,54 +18,79 @@
     </form>
 
     <div id="btn-location">
-        <button id="local">Selecione uma localização</button>
         <img src = "{% static 'img/localizacao.png' %}" alt = "Ícone de localização">
+        <button id="local">Selecione uma localização</button>
     </div>
-    
-    <form action="{% url 'search_location' %}" method="get">
+
+    <form id="locationForm" action="{% url 'search_location' %}" method="get">
         <div id="modal" class="modal">
             <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Localização</h2>
-            <input type="text" id="searchInput" name="location" placeholder="Onde?">
-            <ul id="locationList">
-            </ul>
+                <span class="close">&times;</span>
+                <h2>Localização</h2>
+                <input type="text" id="searchInput" name="location" placeholder="Onde?">
+                <ul id="locationList">
+                    <li id="useCurrentLocation">Usar minha localização atual</li>
+                </ul>
+                <input type="hidden" id="latitudeInput" name="latitude">
+                <input type="hidden" id="longitudeInput" name="longitude">
             </div>
         </div>
     </form>
-
+    
     <script>
-        // Obter o modal
         var modal = document.getElementById('modal');
+        var locationList = document.getElementById('locationList');
+        var useCurrentLocation = document.getElementById('useCurrentLocation');
 
-        // Obter o botão que abre o modal
         var btn = document.getElementById('local');
 
-        // Quando o usuário clicar no botão, abrir o modal
         btn.onclick = function() {
         modal.style.display = 'block';
         };
-
-        // Quando o usuário clicar no 'X', fechar o modal
+    
+        useCurrentLocation.onclick = function() {
+            modal.style.display = 'none'; 
+    
+            // Verifica se o navegador suporta geolocalização
+            if (navigator.geolocation) {
+                // Obtém a localização atual do usuário
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+    
+                    document.getElementById('latitudeInput').value = latitude;
+                    document.getElementById('longitudeInput').value = longitude;
+    
+                    var locationForm = document.getElementById('locationForm');
+                    locationForm.submit();
+                });
+            } else {
+                alert('Seu navegador não suporta geolocalização.');
+            }
+        };
+    
+    
         var span = document.getElementsByClassName('close')[0];
         span.onclick = function() {
         modal.style.display = 'none';
         };
-
+ 
         // Fecha o modal se o usuário clicar fora da área do modal
         window.onclick = function(event) {
         if (event.target == modal) {
-            modal.style.display = 'none';
+        modal.style.display = 'none';
         }
         };
-
     </script>
-      
 
     {% if user.is_authenticated %}
         <div class="container">
             {% if query %}
-                <h1 class="mt-4"> Eventos Disponíveis - {{query}} </h1>
+                <h1 class="mt-4"> Eventos Disponíveis em {{query}} </h1>
+            {% elif city %}
+                <h1 class="mt-4"> Eventos Disponíveis em {{city}} </h1>
+            {% elif state %}
+                <h1 class="mt-4"> Eventos Disponíveis em {{state}} </h1>
             {% else %}
                 <h1 class="mt-4"> Eventos Disponíveis </h1>
             {% endif %}
@@ -77,6 +102,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ event.name }}</h5>
                                 <h6 class="card-title">{{ event.date }}</h6>
+                                <h6 class="card-title">{{ event.city }}, {{event.state}}</h6>
                                 <a href="{% url 'viewEvent' event.id  %}"> <button id = "btn-detalhes"> Detalhes </button></a>
                             </div>
                         </div>

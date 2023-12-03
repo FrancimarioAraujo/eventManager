@@ -2,16 +2,18 @@ from django.shortcuts import redirect, render
 from django.utils import timezone
 from django.http import HttpResponse
 from .models import Events, EventCategory, Ticket
+from orders.models import AvaliarEvento
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages import constants
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render, get_object_or_404
 from .validatros import validar_imagem
 
 def viewEvent(request, evento_id):
     evento = get_object_or_404(Events, pk=evento_id)
+    avaliacao = AvaliarEvento.objects.filter(evento = evento_id)
     ticket = Ticket.objects.filter(event= evento_id)[0]
-    return render(request, 'pagina_evento.html', {'evento': evento, 'ticket': ticket.ticket_price})
+    return render(request, 'pagina_evento.html', {'evento': evento, 'ticket': ticket.ticket_price, 'avaliacao': avaliacao})
 
 @login_required
 def listEvent(request):

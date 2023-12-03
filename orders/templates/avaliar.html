@@ -1,9 +1,44 @@
 {% extends 'base.html' %} 
 {% load static %}
 {% block 'head'%}
-    <title> eventManager - Meus Pedios </title>
+    <title> eventManager - Avaliação </title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/avaliar.css' %}">
 {% endblock 'head'%}
 {% block 'content' %}
-
+<main>    
+    <h1> {{event.name}} - Avalie sua experiência</h1>
+    <form id="formEvent" method="POST" action="{% url 'avaliar' event.id %}">
+        {% csrf_token %}
+            <div class="campo">
+                <label for="title"> Título: </label>
+                <input type="text" name="title" id="title" placeholder= "Título da Avaliação. Exemplo: 'Ótimo evento'" required/>
+            </div>
+            <div class="campo">
+                <label for="description"> Texto: </label>
+                <textarea rows = "4" col = "50" placeholder = "Descreva sua experiência com o evento e o que você achou dele" id="description" name="description" required></textarea>
+            </div>
+            <div class = "campo">
+                <p> Qualidade do Evento </p>
+                <input type = "radio" name = "quality" id = "quality1" value = "1">
+                <label for = "quality1" class = "visivel"> Péssimo </label>
+                <input type = "radio" name = "quality" id = "quality2" value = "2">
+                <label for = "quality2" class = "visivel"> Ruim </label>
+                <input type = "radio" name = "quality" id = "quality3" value = "3">
+                <label for = "quality3" class = "visivel"> Regular </label>
+                <input type = "radio" name = "quality" id = "quality4" value = "4">
+                <label for = "quality4" class = "visivel"> Bom </label>
+                <input type = "radio" name = "quality" id = "quality5" value = "5">
+                <label for = "quality5" class = "visivel"> Excelente </label>
+            </div>
+            <div class = "campo">
+                <p> Você recomendaria esse evento? </p>
+                <input type = "radio" name = "recomendation" id = "recomendationYes" value = "True">
+                <label for = "recomendationYes" class = "visivel"> Sim </label>
+                <input type = "radio" name = "recomendation" id = "recomendationNo" value = "False">
+                <label for = "recomendationNo" class = "visivel"> Não </label>
+            </div>
+            <input type="submit" value="Avaliar Evento" id="btn-avaliar">
+    </form>
+</main>
 {% endblock 'content' %}

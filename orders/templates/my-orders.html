@@ -1,18 +1,37 @@
 {% extends 'base.html' %} 
 {% load static %}
 {% block 'head'%}
-    <title> eventManager - Meus Pedios </title>
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title> eventManager - Meus Pedidos </title>
+    <link rel = "stylesheet" href = "{% static 'css/base.css' %}">
+    <link rel = "stylesheet" href = "{% static 'css/meuspedidos.css'%}">
 {% endblock 'head'%}
 {% block 'content' %}
     {% for pedido in pedido %}
-        {{pedido.evento}}
-        {{pedido.total}}
-        {{pedido.usuario}}
-        {{pedido.status}}
-        {{pedido.quantidade}}
-        {{pedido.dataCompra}}
-        <a href = "#"> <button id = "btn-avaliar-evento"> Avaliar Evento </button></a>
+        <div class = "pedido">
+          <div id="pedido-header">
+        <div>
+            <p class="title">Compra Realizada em </p>
+            <p class="value">{{pedido.dataCompra}}</p>
+        </div>
+        <div>
+            <p class="title">Total</p>
+            <p class="value">{{pedido.total}}</p>
+        </div>
+        <div>
+            <p class="title">Quantidade</p>
+            <p class="value">{{pedido.quantidade}}</p>
+        </div>
+        <div>
+            <p class="title">PEDIDO Nº {{pedido.id}} </p>
+        </div>
+    </div>
+            <div id="pedido-content">
+                <img src = "{% static pedido.evento.image.url %}">
+                {{pedido.evento}}
+                <a href = "{% url 'avaliar' pedido.evento.id %}">
+                <button id = "btn-avaliar-evento"> Avaliar Evento </button></a>
+            </div>
+        </div>
     {% endfor %}
 
 {% endblock 'content' %}
